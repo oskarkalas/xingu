@@ -17,7 +17,7 @@ generator pothos {
   output       = "./pothos-types.ts"
 }
 
-generator pothos-codegen {
+generator pothosCrud {
   provider            = "prisma-generator-pothos-codegen"
   output              = "./generated/pothos" // výstup relativně k umístění tohoto schema.prisma
   clientOutput        = "../../../node_modules/.prisma/client" // volitelné, když je potřeba specifikovat klienta

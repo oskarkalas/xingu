@@ -29,9 +29,6 @@
     "typescript": "~5.9.2",
     "webpack-cli": "^5.1.4"
   },
-  "workspaces": [
-    "packages/*"
-  ],
   "dependencies": {
     "@nestjs/common": "^11.1.6",
     "@nestjs/core": "^11.1.6",

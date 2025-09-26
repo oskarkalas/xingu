@@ -3,6 +3,9 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "target": "ES2022"
+    "target": "ES2022",
+    "paths": {
+      "@xingu/prisma": ["packages/prisma/src/index.ts"]
+    }
   }
 }

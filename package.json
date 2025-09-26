@@ -38,14 +38,18 @@
     "jest-environment-node": "^30.0.2",
     "jest-preset-angular": "~14.6.1",
     "jest-util": "^30.0.2",
+    "jsonc-eslint-parser": "^2.1.0",
     "nx": "21.5.3",
     "prettier": "^2.6.2",
     "prisma": "^6.16.2",
+    "prisma-docs-generator": "^0.8.0",
+    "prisma-generator-typescript-interfaces": "^3.1.0",
     "ts-jest": "^29.4.0",
     "ts-node": "10.9.1",
     "tslib": "^2.3.0",
     "typescript": "~5.9.2",
     "typescript-eslint": "^8.40.0",
+    "verdaccio": "^6.0.5",
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
@@ -68,5 +72,8 @@
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.2",
     "zone.js": "~0.15.0"
+  },
+  "nx": {
+    "includedScripts": []
   }
 }

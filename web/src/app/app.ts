@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NxWelcome } from './nx-welcome';
+import { Catalog } from '@xingu/prisma';
 
 @Component({
   imports: [NxWelcome, RouterModule],
@@ -10,4 +11,5 @@ import { NxWelcome } from './nx-welcome';
 })
 export class App {
   protected title = 'web';
+  private user?: Catalog
 }

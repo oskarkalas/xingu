@@ -11,6 +11,22 @@ generator typescriptInterfaces {
   provider = "prisma-generator-typescript-interfaces"
 }
 
+generator pothos {
+  provider     = "prisma-pothos-types"
+  clientOutput = "@prisma/client"
+  output       = "./pothos-types.ts"
+}
+
+generator pothos-codegen {
+  provider     = "prisma-generator-pothos-codegen"
+  output       = "./generated/pothos" // výstup relativně k umístění tohoto schema.prisma
+  clientOutput = "../../../node_modules/.prisma/client" // volitelné, když je potřeba specifikovat klienta
+  // optional flags podle potřeby:
+  // builderPath = "@pothos/core"
+  // prismaPlugin = "@pothos/plugin-prisma"
+  // exportSimpleTypes = true
+}
+
 // generator docs {
 //   provider = "prisma-docs-generator"
 //   output   = "./prisma-docs"

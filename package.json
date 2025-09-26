@@ -43,6 +43,7 @@
     "prettier": "^2.6.2",
     "prisma": "^6.16.2",
     "prisma-docs-generator": "^0.8.0",
+    "prisma-generator-pothos-codegen": "^0.7.1",
     "prisma-generator-typescript-interfaces": "^3.1.0",
     "ts-jest": "^29.4.0",
     "ts-node": "10.9.1",

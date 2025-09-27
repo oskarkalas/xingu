@@ -19,8 +19,6 @@ generator pothos {
 
 generator pothosCrud {
   provider            = "prisma-generator-pothos-codegen"
-  output              = "./generated/pothos" // výstup relativně k umístění tohoto schema.prisma
-  clientOutput        = "../../../node_modules/.prisma/client" // volitelné, když je potřeba specifikovat klienta
   generatorConfigPath = "../../pothos.config.js"
   // optional flags podle potřeby:
   // builderPath = "@pothos/core"

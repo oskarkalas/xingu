@@ -3,7 +3,7 @@ import { generateAllCrud } from './generated/autocrud';
 
 const authResolversMap = {
   User: {
-    findManyUser: ['admin'],
+    // findManyUser: ['admin'],
     findFirstUser: ['admin'],
     findUniqueUser: ['admin'],
     countUser: ['admin'],

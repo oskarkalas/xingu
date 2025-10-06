@@ -1,29 +1,37 @@
 import { builder } from './builder';
 import { generateAllCrud } from './generated/autocrud';
 
-generateAllCrud({
-  handleResolver: ({ field, modelName, operationName, resolverName }) => {
-    const authConfig: Record<string, Record<string, any>> = {
-      User: {
-        // findManyUser: { authScopes: { user: true } },
-        findFirstUser: { authScopes: { admin: true } },
-        findUniqueUser: { authScopes: { admin: true } },
-        countUser: { authScopes: { admin: true } },
-        createOneUser: { authScopes: { admin: true } },
-        updateOneUser: { authScopes: { admin: true } },
-        deleteOneUser: { authScopes: { admin: true } },
-      },
-      Catalog: {
-        findManyCatalog: { authScopes: { admin: true } },
-        findFirstCatalog: { authScopes: { user: true } },
-        findUniqueCatalog: { authScopes: { user: true } },
-      },
-    };
+const authResolversMap = {
+  User: {
+    findManyUser: ['admin'],
+    findFirstUser: ['admin'],
+    findUniqueUser: ['admin'],
+    countUser: ['admin'],
+    createOneUser: ['admin'],
+    updateOneUser: ['admin'],
+    deleteOneUser: ['admin'],
+  },
+  Catalog: {
+    findManyCatalog: ['admin'],
+    findFirstCatalog: ['user'],
+    findUniqueCatalog: ['user'],
+  },
+} as const;
 
-    if (authConfig[modelName]?.[resolverName]) {
+function createAuthScopes(roles: readonly string[]) {
+  return roles.reduce((acc, role) => ({ ...acc, [role]: true }), {});
+}
+
+generateAllCrud({
+  handleResolver: ({ field, modelName, resolverName }) => {
+    const roles = authResolversMap[modelName as keyof typeof authResolversMap]?.[
+      resolverName as keyof (typeof authResolversMap)[keyof typeof authResolversMap]
+      ];
+
+    if (roles) {
       return {
         ...field,
-        ...authConfig[modelName][resolverName],
+        authScopes: createAuthScopes(roles),
       };
     }
 

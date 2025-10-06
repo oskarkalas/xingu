@@ -1,13 +1,12 @@
 {
-  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "../dist/out-tsc",
-    "module": "commonjs",
-    "types": ["node"],
+    "target": "ES2022",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "target": "es2021"
-  },
-  "include": ["src/**/*.ts"],
-  "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"]
+    "esModuleInterop": true,
+    "strict": true,
+    "useDefineForClassFields": false
+  }
 }

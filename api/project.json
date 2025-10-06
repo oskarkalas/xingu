@@ -43,6 +43,12 @@
       "dependsOn": ["prune-lockfile", "copy-workspace-modules"],
       "executor": "nx:noop"
     },
+    "prisma-generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "prisma generate --schema=api/src/prisma/schema.prisma"
+      }
+    },
     "serve": {
       "continuous": true,
       "executor": "@nx/js:node",

@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator typescriptInterfaces {
+  provider = "prisma-generator-typescript-interfaces"
+  output       = "./../interfaces/generated/prisma-models.ts"
+}
+
+generator pothos {
+  provider     = "prisma-pothos-types"
+  clientOutput = "@prisma/client"
+  output       = "./../graphql/generated/pothos-types.ts"
+}
+
+generator pothosCrud {
+  provider            = "prisma-generator-pothos-codegen"
+  generatorConfigPath = "../../pothos.config.js"
+  // optional flags podle potřeby:
+  // builderPath = "@pothos/core"
+  // prismaPlugin = "@pothos/plugin-prisma"
+  // exportSimpleTypes = true
+}
+
+// generator docs {
+//   provider = "prisma-docs-generator"
+//   output   = "./prisma-docs"
+// }
+
+// generator typegraphql {
+//   provider            = "typegraphql-prisma"
+//   output              = "../prisma/generated/type-graphql"
+//   formatGeneratedCode = "prettier"
+// }
+
+model User {
+  id           Int        @id @default(autoincrement())
+  firstName    String?
+  lastName     String?
+  picture      String?
+  email        String     @unique
+  catalog      Catalog[]
+  /// @TypeGraphQL.omit(output: true)
+  password     String?
+  refreshToken String?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  role         Role       @default(admin)
+  provider     Provider[] @default([])
+}
+
+model Catalog {
+  id          Int     @id @default(autoincrement())
+  title       String?
+  description String?
+  type        String?
+  author      String?
+  owner       User    @relation(fields: [ownerId], references: [id])
+  ownerId     Int
+}
+
+enum Role {
+  admin
+  user
+  editor
+}
+
+enum Provider {
+  google
+  facebook
+  github
+  microsoft
+}

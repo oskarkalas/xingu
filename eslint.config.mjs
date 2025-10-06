@@ -5,7 +5,14 @@ export default [
   ...nx.configs['flat/typescript'],
   ...nx.configs['flat/javascript'],
   {
-    ignores: ['**/dist'],
+    ignores: [
+      'node_modules',
+      'dist',
+      '.nx',
+      '**/dist',
+      'api/src/generated/**/*',  // Přidáno: ignorování vygenerovaných souborů
+      '**/generated/**/*',        // Přidáno: ignorování všech generated adresářů
+    ],
   },
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],

@@ -9,7 +9,7 @@ datasource db {
 
 generator typescriptInterfaces {
   provider = "prisma-generator-typescript-interfaces"
-  output       = "./../interfaces/generated/prisma-models.ts"
+  output   = "./../interfaces/generated/prisma-models.ts"
 }
 
 generator pothos {

@@ -59,6 +59,9 @@ importers:
       '@pothos/plugin-prisma':
         specifier: ^4.11.0
         version: 4.11.0(@pothos/core@4.9.1(graphql@16.11.0))(@prisma/client@6.16.2(prisma@6.16.2(typescript@5.9.2))(typescript@5.9.2))(graphql@16.11.0)(typescript@5.9.2)
+      '@pothos/plugin-scope-auth':
+        specifier: ^4.1.6
+        version: 4.1.6(@pothos/core@4.9.1(graphql@16.11.0))(graphql@16.11.0)
       '@prisma/client':
         specifier: ^6.16.2
         version: 6.16.2(prisma@6.16.2(typescript@5.9.2))(typescript@5.9.2)
@@ -2852,6 +2855,12 @@ packages:
       '@prisma/client': '*'
       graphql: ^16.10.0
       typescript: '>=4.7.2'
+
+  '@pothos/plugin-scope-auth@4.1.6':
+    resolution: {integrity: sha512-OuVrDiIf03VrExT3sgyt6YHYuFdUbJ6a6R9cHa01JWbnDUTEag8jFhtstZHou4tB8PkldtUgSspfkhJvFNk6bA==}
+    peerDependencies:
+      '@pothos/core': '*'
+      graphql: ^16.10.0
 
   '@prisma/client@6.16.2':
     resolution: {integrity: sha512-E00PxBcalMfYO/TWnXobBVUai6eW/g5OsifWQsQDzJYm7yaY+IRLo7ZLsaefi0QkTpxfuhFcQ/w180i6kX3iJw==}
@@ -12765,6 +12774,11 @@ snapshots:
       '@prisma/generator-helper': 6.16.2
       graphql: 16.11.0
       typescript: 5.9.2
+
+  '@pothos/plugin-scope-auth@4.1.6(@pothos/core@4.9.1(graphql@16.11.0))(graphql@16.11.0)':
+    dependencies:
+      '@pothos/core': 4.9.1(graphql@16.11.0)
+      graphql: 16.11.0
 
   '@prisma/client@6.16.2(prisma@6.16.2(typescript@5.9.2))(typescript@5.9.2)':
     optionalDependencies:

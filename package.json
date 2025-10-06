@@ -72,6 +72,7 @@
     "@nestjs/platform-express": "^11.0.0",
     "@pothos/core": "^4.9.1",
     "@pothos/plugin-prisma": "^4.11.0",
+    "@pothos/plugin-scope-auth": "^4.1.6",
     "@prisma/client": "^6.16.2",
     "axios": "^1.6.0",
     "express": "^5.1.0",

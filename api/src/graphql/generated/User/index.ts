@@ -1,17 +1,14 @@
 export {
   UserObject,
   UserIdFieldObject,
-  UserFirstNameFieldObject,
-  UserLastNameFieldObject,
-  UserPictureFieldObject,
   UserEmailFieldObject,
-  UserCatalogFieldObject,
+  UserNameFieldObject,
+  UserImageFieldObject,
   UserPasswordFieldObject,
-  UserRefreshTokenFieldObject,
+  UserRolesFieldObject,
+  UserAccountsFieldObject,
   UserCreatedAtFieldObject,
-  UserUpdatedAtFieldObject,
-  UserRoleFieldObject,
-  UserProviderFieldObject
+  UserUpdatedAtFieldObject
 } from './object.base';
 export {
   createManyUserMutation,

@@ -1,5 +1,9 @@
 import * as User from './User';
-import * as Catalog from './Catalog';
+import * as Account from './Account';
+import * as Role from './Role';
+import * as Permission from './Permission';
+import * as UserRole from './UserRole';
+import * as RolePermission from './RolePermission';
 import { builder } from '../builder';
 import * as Objects from './objects';
 
@@ -31,22 +35,94 @@ export const Cruds: Record<
       upsertOne: User.upsertOneUserMutationObject,
     },
   },
-  Catalog: {
-    Object: Catalog.CatalogObject,
+  Account: {
+    Object: Account.AccountObject,
     queries: {
-      findFirst: Catalog.findFirstCatalogQueryObject,
-      findMany: Catalog.findManyCatalogQueryObject,
-      count: Catalog.countCatalogQueryObject,
-      findUnique: Catalog.findUniqueCatalogQueryObject,
+      findFirst: Account.findFirstAccountQueryObject,
+      findMany: Account.findManyAccountQueryObject,
+      count: Account.countAccountQueryObject,
+      findUnique: Account.findUniqueAccountQueryObject,
     },
     mutations: {
-      createMany: Catalog.createManyCatalogMutationObject,
-      createOne: Catalog.createOneCatalogMutationObject,
-      deleteMany: Catalog.deleteManyCatalogMutationObject,
-      deleteOne: Catalog.deleteOneCatalogMutationObject,
-      updateMany: Catalog.updateManyCatalogMutationObject,
-      updateOne: Catalog.updateOneCatalogMutationObject,
-      upsertOne: Catalog.upsertOneCatalogMutationObject,
+      createMany: Account.createManyAccountMutationObject,
+      createOne: Account.createOneAccountMutationObject,
+      deleteMany: Account.deleteManyAccountMutationObject,
+      deleteOne: Account.deleteOneAccountMutationObject,
+      updateMany: Account.updateManyAccountMutationObject,
+      updateOne: Account.updateOneAccountMutationObject,
+      upsertOne: Account.upsertOneAccountMutationObject,
+    },
+  },
+  Role: {
+    Object: Role.RoleObject,
+    queries: {
+      findFirst: Role.findFirstRoleQueryObject,
+      findMany: Role.findManyRoleQueryObject,
+      count: Role.countRoleQueryObject,
+      findUnique: Role.findUniqueRoleQueryObject,
+    },
+    mutations: {
+      createMany: Role.createManyRoleMutationObject,
+      createOne: Role.createOneRoleMutationObject,
+      deleteMany: Role.deleteManyRoleMutationObject,
+      deleteOne: Role.deleteOneRoleMutationObject,
+      updateMany: Role.updateManyRoleMutationObject,
+      updateOne: Role.updateOneRoleMutationObject,
+      upsertOne: Role.upsertOneRoleMutationObject,
+    },
+  },
+  Permission: {
+    Object: Permission.PermissionObject,
+    queries: {
+      findFirst: Permission.findFirstPermissionQueryObject,
+      findMany: Permission.findManyPermissionQueryObject,
+      count: Permission.countPermissionQueryObject,
+      findUnique: Permission.findUniquePermissionQueryObject,
+    },
+    mutations: {
+      createMany: Permission.createManyPermissionMutationObject,
+      createOne: Permission.createOnePermissionMutationObject,
+      deleteMany: Permission.deleteManyPermissionMutationObject,
+      deleteOne: Permission.deleteOnePermissionMutationObject,
+      updateMany: Permission.updateManyPermissionMutationObject,
+      updateOne: Permission.updateOnePermissionMutationObject,
+      upsertOne: Permission.upsertOnePermissionMutationObject,
+    },
+  },
+  UserRole: {
+    Object: UserRole.UserRoleObject,
+    queries: {
+      findFirst: UserRole.findFirstUserRoleQueryObject,
+      findMany: UserRole.findManyUserRoleQueryObject,
+      count: UserRole.countUserRoleQueryObject,
+      findUnique: UserRole.findUniqueUserRoleQueryObject,
+    },
+    mutations: {
+      createMany: UserRole.createManyUserRoleMutationObject,
+      createOne: UserRole.createOneUserRoleMutationObject,
+      deleteMany: UserRole.deleteManyUserRoleMutationObject,
+      deleteOne: UserRole.deleteOneUserRoleMutationObject,
+      updateMany: UserRole.updateManyUserRoleMutationObject,
+      updateOne: UserRole.updateOneUserRoleMutationObject,
+      upsertOne: UserRole.upsertOneUserRoleMutationObject,
+    },
+  },
+  RolePermission: {
+    Object: RolePermission.RolePermissionObject,
+    queries: {
+      findFirst: RolePermission.findFirstRolePermissionQueryObject,
+      findMany: RolePermission.findManyRolePermissionQueryObject,
+      count: RolePermission.countRolePermissionQueryObject,
+      findUnique: RolePermission.findUniqueRolePermissionQueryObject,
+    },
+    mutations: {
+      createMany: RolePermission.createManyRolePermissionMutationObject,
+      createOne: RolePermission.createOneRolePermissionMutationObject,
+      deleteMany: RolePermission.deleteManyRolePermissionMutationObject,
+      deleteOne: RolePermission.deleteOneRolePermissionMutationObject,
+      updateMany: RolePermission.updateManyRolePermissionMutationObject,
+      updateOne: RolePermission.updateOneRolePermissionMutationObject,
+      upsertOne: RolePermission.upsertOneRolePermissionMutationObject,
     },
   },
 };

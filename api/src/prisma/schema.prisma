@@ -23,56 +23,64 @@ generator pothosCrud {
   generatorConfigPath = "../../pothos.config.js"
   // optional flags podle potřeby:
   // builderPath = "@pothos/core"
-  // prismaPlugin = "@pothos/plugin-prisma"
+  prismaPlugin        = "@pothos/plugin-prisma"
   // exportSimpleTypes = true
 }
 
-// generator docs {
-//   provider = "prisma-docs-generator"
-//   output   = "./prisma-docs"
-// }
-
-// generator typegraphql {
-//   provider            = "typegraphql-prisma"
-//   output              = "../prisma/generated/type-graphql"
-//   formatGeneratedCode = "prettier"
-// }
-
 model User {
-  id           Int        @id @default(autoincrement())
-  firstName    String?
-  lastName     String?
-  picture      String?
-  email        String     @unique
-  catalog      Catalog[]
-  /// @TypeGraphQL.omit(output: true)
-  password     String?
-  refreshToken String?
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-  role         Role       @default(admin)
-  provider     Provider[] @default([])
+  id        Int        @id @default(autoincrement())
+  email     String?    @unique
+  name      String?
+  image     String?
+  password  String? // <- uložený hash hesla
+  roles     UserRole[]
+  accounts  Account[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
 }
 
-model Catalog {
-  id          Int     @id @default(autoincrement())
-  title       String?
+model Account {
+  id                Int       @id @default(autoincrement())
+  provider          String // "google" | "github" | "facebook" | "apple"
+  providerAccountId String // ID od poskytovatele
+  accessToken       String? // volitelné, pokud ukládáš tokeny
+  refreshToken      String?
+  expiresAt         DateTime?
+  userId            Int
+  user              User      @relation(fields: [userId], references: [id])
+
+  @@unique([provider, providerAccountId])
+}
+
+model Role {
+  id          Int              @id @default(autoincrement())
+  name        String           @unique
   description String?
-  type        String?
-  author      String?
-  owner       User    @relation(fields: [ownerId], references: [id])
-  ownerId     Int
+  users       UserRole[]
+  permissions RolePermission[]
 }
 
-enum Role {
-  admin
-  user
-  editor
+model Permission {
+  id          Int              @id @default(autoincrement())
+  name        String           @unique
+  description String?
+  roles       RolePermission[]
 }
 
-enum Provider {
-  google
-  facebook
-  github
-  microsoft
+model UserRole {
+  userId Int
+  roleId Int
+  user   User @relation(fields: [userId], references: [id])
+  role   Role @relation(fields: [roleId], references: [id])
+
+  @@id([userId, roleId])
+}
+
+model RolePermission {
+  roleId       Int
+  permissionId Int
+  role         Role       @relation(fields: [roleId], references: [id])
+  permission   Permission @relation(fields: [permissionId], references: [id])
+
+  @@id([roleId, permissionId])
 }

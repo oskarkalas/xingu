@@ -6,7 +6,7 @@ const authResolversMap = {
     // findManyUser: ['admin'],
     findFirstUser: ['admin'],
     findUniqueUser: ['admin'],
-    countUser: ['admin'],
+    // countUser: ['admin'],
     createOneUser: ['admin'],
     updateOneUser: ['admin'],
     deleteOneUser: ['admin'],

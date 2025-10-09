@@ -8,7 +8,9 @@ export {
   UserRolesFieldObject,
   UserAccountsFieldObject,
   UserCreatedAtFieldObject,
-  UserUpdatedAtFieldObject
+  UserUpdatedAtFieldObject,
+  UserPasswordResetTokenFieldObject,
+  UserVerificationTokenFieldObject
 } from './object.base';
 export {
   createManyUserMutation,

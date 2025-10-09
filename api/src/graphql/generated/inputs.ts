@@ -80,6 +80,14 @@ export const RolePermissionScalarFieldEnum = builder.enumType('RolePermissionSca
   values: ["roleId","permissionId"] as const,
 });
 
+export const PasswordResetTokenScalarFieldEnum = builder.enumType('PasswordResetTokenScalarFieldEnum', {
+  values: ["id","userId","tokenHash","expiresAt"] as const,
+});
+
+export const VerificationTokenScalarFieldEnum = builder.enumType('VerificationTokenScalarFieldEnum', {
+  values: ["id","userId","tokenHash","expiresAt"] as const,
+});
+
 export const SortOrder = builder.enumType('SortOrder', {
   values: ["asc","desc"] as const,
 });
@@ -105,6 +113,8 @@ export const UserWhereInputFields = (t: any) => ({
   updatedAt: t.field({"required":false,"type":DateTimeFilter}),
   roles: t.field({"required":false,"type":UserRoleListRelationFilter}),
   accounts: t.field({"required":false,"type":AccountListRelationFilter}),
+  PasswordResetToken: t.field({"required":false,"type":PasswordResetTokenListRelationFilter}),
+  VerificationToken: t.field({"required":false,"type":VerificationTokenListRelationFilter}),
 });
 export const UserWhereInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.UserWhereInput>, false>('UserWhereInput').implement({
   fields: UserWhereInputFields,
@@ -120,6 +130,8 @@ export const UserOrderByWithRelationInputFields = (t: any) => ({
   updatedAt: t.field({"required":false,"type":SortOrder}),
   roles: t.field({"required":false,"type":UserRoleOrderByRelationAggregateInput}),
   accounts: t.field({"required":false,"type":AccountOrderByRelationAggregateInput}),
+  PasswordResetToken: t.field({"required":false,"type":PasswordResetTokenOrderByRelationAggregateInput}),
+  VerificationToken: t.field({"required":false,"type":VerificationTokenOrderByRelationAggregateInput}),
 });
 export const UserOrderByWithRelationInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.UserOrderByWithRelationInput>, false>('UserOrderByWithRelationInput').implement({
   fields: UserOrderByWithRelationInputFields,
@@ -138,6 +150,8 @@ export const UserWhereUniqueInputFields = (t: any) => ({
   updatedAt: t.field({"required":false,"type":DateTimeFilter}),
   roles: t.field({"required":false,"type":UserRoleListRelationFilter}),
   accounts: t.field({"required":false,"type":AccountListRelationFilter}),
+  PasswordResetToken: t.field({"required":false,"type":PasswordResetTokenListRelationFilter}),
+  VerificationToken: t.field({"required":false,"type":VerificationTokenListRelationFilter}),
 });
 export const UserWhereUniqueInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.UserWhereUniqueInput>, false>('UserWhereUniqueInput').implement({
   fields: UserWhereUniqueInputFields,
@@ -509,6 +523,140 @@ export const RolePermissionScalarWhereWithAggregatesInput = builder.inputRef<Pri
   fields: RolePermissionScalarWhereWithAggregatesInputFields,
 });
 
+export const PasswordResetTokenWhereInputFields = (t: any) => ({
+  AND: t.field({"required":false,"type":[PasswordResetTokenWhereInput]}),
+  OR: t.field({"required":false,"type":[PasswordResetTokenWhereInput]}),
+  NOT: t.field({"required":false,"type":[PasswordResetTokenWhereInput]}),
+  id: t.field({"required":false,"type":IntFilter}),
+  userId: t.field({"required":false,"type":IntFilter}),
+  tokenHash: t.field({"required":false,"type":StringFilter}),
+  expiresAt: t.field({"required":false,"type":DateTimeFilter}),
+  user: t.field({"required":false,"type":UserWhereInput}),
+});
+export const PasswordResetTokenWhereInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenWhereInput>, false>('PasswordResetTokenWhereInput').implement({
+  fields: PasswordResetTokenWhereInputFields,
+});
+
+export const PasswordResetTokenOrderByWithRelationInputFields = (t: any) => ({
+  id: t.field({"required":false,"type":SortOrder}),
+  userId: t.field({"required":false,"type":SortOrder}),
+  tokenHash: t.field({"required":false,"type":SortOrder}),
+  expiresAt: t.field({"required":false,"type":SortOrder}),
+  user: t.field({"required":false,"type":UserOrderByWithRelationInput}),
+});
+export const PasswordResetTokenOrderByWithRelationInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenOrderByWithRelationInput>, false>('PasswordResetTokenOrderByWithRelationInput').implement({
+  fields: PasswordResetTokenOrderByWithRelationInputFields,
+});
+
+export const PasswordResetTokenWhereUniqueInputFields = (t: any) => ({
+  id: t.int({"required":false}),
+  AND: t.field({"required":false,"type":[PasswordResetTokenWhereInput]}),
+  OR: t.field({"required":false,"type":[PasswordResetTokenWhereInput]}),
+  NOT: t.field({"required":false,"type":[PasswordResetTokenWhereInput]}),
+  userId: t.field({"required":false,"type":IntFilter}),
+  tokenHash: t.field({"required":false,"type":StringFilter}),
+  expiresAt: t.field({"required":false,"type":DateTimeFilter}),
+  user: t.field({"required":false,"type":UserWhereInput}),
+});
+export const PasswordResetTokenWhereUniqueInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenWhereUniqueInput>, false>('PasswordResetTokenWhereUniqueInput').implement({
+  fields: PasswordResetTokenWhereUniqueInputFields,
+});
+
+export const PasswordResetTokenOrderByWithAggregationInputFields = (t: any) => ({
+  id: t.field({"required":false,"type":SortOrder}),
+  userId: t.field({"required":false,"type":SortOrder}),
+  tokenHash: t.field({"required":false,"type":SortOrder}),
+  expiresAt: t.field({"required":false,"type":SortOrder}),
+  _count: t.field({"required":false,"type":PasswordResetTokenCountOrderByAggregateInput}),
+  _avg: t.field({"required":false,"type":PasswordResetTokenAvgOrderByAggregateInput}),
+  _max: t.field({"required":false,"type":PasswordResetTokenMaxOrderByAggregateInput}),
+  _min: t.field({"required":false,"type":PasswordResetTokenMinOrderByAggregateInput}),
+  _sum: t.field({"required":false,"type":PasswordResetTokenSumOrderByAggregateInput}),
+});
+export const PasswordResetTokenOrderByWithAggregationInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenOrderByWithAggregationInput>, false>('PasswordResetTokenOrderByWithAggregationInput').implement({
+  fields: PasswordResetTokenOrderByWithAggregationInputFields,
+});
+
+export const PasswordResetTokenScalarWhereWithAggregatesInputFields = (t: any) => ({
+  AND: t.field({"required":false,"type":[PasswordResetTokenScalarWhereWithAggregatesInput]}),
+  OR: t.field({"required":false,"type":[PasswordResetTokenScalarWhereWithAggregatesInput]}),
+  NOT: t.field({"required":false,"type":[PasswordResetTokenScalarWhereWithAggregatesInput]}),
+  id: t.field({"required":false,"type":IntWithAggregatesFilter}),
+  userId: t.field({"required":false,"type":IntWithAggregatesFilter}),
+  tokenHash: t.field({"required":false,"type":StringWithAggregatesFilter}),
+  expiresAt: t.field({"required":false,"type":DateTimeWithAggregatesFilter}),
+});
+export const PasswordResetTokenScalarWhereWithAggregatesInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenScalarWhereWithAggregatesInput>, false>('PasswordResetTokenScalarWhereWithAggregatesInput').implement({
+  fields: PasswordResetTokenScalarWhereWithAggregatesInputFields,
+});
+
+export const VerificationTokenWhereInputFields = (t: any) => ({
+  AND: t.field({"required":false,"type":[VerificationTokenWhereInput]}),
+  OR: t.field({"required":false,"type":[VerificationTokenWhereInput]}),
+  NOT: t.field({"required":false,"type":[VerificationTokenWhereInput]}),
+  id: t.field({"required":false,"type":IntFilter}),
+  userId: t.field({"required":false,"type":IntFilter}),
+  tokenHash: t.field({"required":false,"type":StringFilter}),
+  expiresAt: t.field({"required":false,"type":DateTimeFilter}),
+  user: t.field({"required":false,"type":UserWhereInput}),
+});
+export const VerificationTokenWhereInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenWhereInput>, false>('VerificationTokenWhereInput').implement({
+  fields: VerificationTokenWhereInputFields,
+});
+
+export const VerificationTokenOrderByWithRelationInputFields = (t: any) => ({
+  id: t.field({"required":false,"type":SortOrder}),
+  userId: t.field({"required":false,"type":SortOrder}),
+  tokenHash: t.field({"required":false,"type":SortOrder}),
+  expiresAt: t.field({"required":false,"type":SortOrder}),
+  user: t.field({"required":false,"type":UserOrderByWithRelationInput}),
+});
+export const VerificationTokenOrderByWithRelationInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenOrderByWithRelationInput>, false>('VerificationTokenOrderByWithRelationInput').implement({
+  fields: VerificationTokenOrderByWithRelationInputFields,
+});
+
+export const VerificationTokenWhereUniqueInputFields = (t: any) => ({
+  id: t.int({"required":false}),
+  AND: t.field({"required":false,"type":[VerificationTokenWhereInput]}),
+  OR: t.field({"required":false,"type":[VerificationTokenWhereInput]}),
+  NOT: t.field({"required":false,"type":[VerificationTokenWhereInput]}),
+  userId: t.field({"required":false,"type":IntFilter}),
+  tokenHash: t.field({"required":false,"type":StringFilter}),
+  expiresAt: t.field({"required":false,"type":DateTimeFilter}),
+  user: t.field({"required":false,"type":UserWhereInput}),
+});
+export const VerificationTokenWhereUniqueInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenWhereUniqueInput>, false>('VerificationTokenWhereUniqueInput').implement({
+  fields: VerificationTokenWhereUniqueInputFields,
+});
+
+export const VerificationTokenOrderByWithAggregationInputFields = (t: any) => ({
+  id: t.field({"required":false,"type":SortOrder}),
+  userId: t.field({"required":false,"type":SortOrder}),
+  tokenHash: t.field({"required":false,"type":SortOrder}),
+  expiresAt: t.field({"required":false,"type":SortOrder}),
+  _count: t.field({"required":false,"type":VerificationTokenCountOrderByAggregateInput}),
+  _avg: t.field({"required":false,"type":VerificationTokenAvgOrderByAggregateInput}),
+  _max: t.field({"required":false,"type":VerificationTokenMaxOrderByAggregateInput}),
+  _min: t.field({"required":false,"type":VerificationTokenMinOrderByAggregateInput}),
+  _sum: t.field({"required":false,"type":VerificationTokenSumOrderByAggregateInput}),
+});
+export const VerificationTokenOrderByWithAggregationInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenOrderByWithAggregationInput>, false>('VerificationTokenOrderByWithAggregationInput').implement({
+  fields: VerificationTokenOrderByWithAggregationInputFields,
+});
+
+export const VerificationTokenScalarWhereWithAggregatesInputFields = (t: any) => ({
+  AND: t.field({"required":false,"type":[VerificationTokenScalarWhereWithAggregatesInput]}),
+  OR: t.field({"required":false,"type":[VerificationTokenScalarWhereWithAggregatesInput]}),
+  NOT: t.field({"required":false,"type":[VerificationTokenScalarWhereWithAggregatesInput]}),
+  id: t.field({"required":false,"type":IntWithAggregatesFilter}),
+  userId: t.field({"required":false,"type":IntWithAggregatesFilter}),
+  tokenHash: t.field({"required":false,"type":StringWithAggregatesFilter}),
+  expiresAt: t.field({"required":false,"type":DateTimeWithAggregatesFilter}),
+});
+export const VerificationTokenScalarWhereWithAggregatesInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenScalarWhereWithAggregatesInput>, false>('VerificationTokenScalarWhereWithAggregatesInput').implement({
+  fields: VerificationTokenScalarWhereWithAggregatesInputFields,
+});
+
 export const UserCreateInputFields = (t: any) => ({
   email: t.string({"required":false}),
   name: t.string({"required":false}),
@@ -518,6 +666,8 @@ export const UserCreateInputFields = (t: any) => ({
   updatedAt: t.field({"required":false,"type":DateTime}),
   roles: t.field({"required":false,"type":UserRoleCreateNestedManyWithoutUserInput}),
   accounts: t.field({"required":false,"type":AccountCreateNestedManyWithoutUserInput}),
+  PasswordResetToken: t.field({"required":false,"type":PasswordResetTokenCreateNestedManyWithoutUserInput}),
+  VerificationToken: t.field({"required":false,"type":VerificationTokenCreateNestedManyWithoutUserInput}),
 });
 export const UserCreateInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.UserCreateInput>, false>('UserCreateInput').implement({
   fields: UserCreateInputFields,
@@ -532,6 +682,8 @@ export const UserUpdateInputFields = (t: any) => ({
   updatedAt: t.field({"required":false,"type":DateTimeFieldUpdateOperationsInput}),
   roles: t.field({"required":false,"type":UserRoleUpdateManyWithoutUserNestedInput}),
   accounts: t.field({"required":false,"type":AccountUpdateManyWithoutUserNestedInput}),
+  PasswordResetToken: t.field({"required":false,"type":PasswordResetTokenUpdateManyWithoutUserNestedInput}),
+  VerificationToken: t.field({"required":false,"type":VerificationTokenUpdateManyWithoutUserNestedInput}),
 });
 export const UserUpdateInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.UserUpdateInput>, false>('UserUpdateInput').implement({
   fields: UserUpdateInputFields,
@@ -744,6 +896,78 @@ export const RolePermissionUpdateManyMutationInput = builder.inputRef<PrismaUpda
   fields: RolePermissionUpdateManyMutationInputFields,
 });
 
+export const PasswordResetTokenCreateInputFields = (t: any) => ({
+  tokenHash: t.string({"required":true}),
+  expiresAt: t.field({"required":true,"type":DateTime}),
+  user: t.field({"required":true,"type":UserCreateNestedOneWithoutPasswordResetTokenInput}),
+});
+export const PasswordResetTokenCreateInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenCreateInput>, false>('PasswordResetTokenCreateInput').implement({
+  fields: PasswordResetTokenCreateInputFields,
+});
+
+export const PasswordResetTokenUpdateInputFields = (t: any) => ({
+  tokenHash: t.field({"required":false,"type":StringFieldUpdateOperationsInput}),
+  expiresAt: t.field({"required":false,"type":DateTimeFieldUpdateOperationsInput}),
+  user: t.field({"required":false,"type":UserUpdateOneRequiredWithoutPasswordResetTokenNestedInput}),
+});
+export const PasswordResetTokenUpdateInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenUpdateInput>, false>('PasswordResetTokenUpdateInput').implement({
+  fields: PasswordResetTokenUpdateInputFields,
+});
+
+export const PasswordResetTokenCreateManyInputFields = (t: any) => ({
+  id: t.int({"required":false}),
+  userId: t.int({"required":true}),
+  tokenHash: t.string({"required":true}),
+  expiresAt: t.field({"required":true,"type":DateTime}),
+});
+export const PasswordResetTokenCreateManyInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenCreateManyInput>, false>('PasswordResetTokenCreateManyInput').implement({
+  fields: PasswordResetTokenCreateManyInputFields,
+});
+
+export const PasswordResetTokenUpdateManyMutationInputFields = (t: any) => ({
+  tokenHash: t.field({"required":false,"type":StringFieldUpdateOperationsInput}),
+  expiresAt: t.field({"required":false,"type":DateTimeFieldUpdateOperationsInput}),
+});
+export const PasswordResetTokenUpdateManyMutationInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenUpdateManyMutationInput>, false>('PasswordResetTokenUpdateManyMutationInput').implement({
+  fields: PasswordResetTokenUpdateManyMutationInputFields,
+});
+
+export const VerificationTokenCreateInputFields = (t: any) => ({
+  tokenHash: t.string({"required":true}),
+  expiresAt: t.field({"required":true,"type":DateTime}),
+  user: t.field({"required":true,"type":UserCreateNestedOneWithoutVerificationTokenInput}),
+});
+export const VerificationTokenCreateInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenCreateInput>, false>('VerificationTokenCreateInput').implement({
+  fields: VerificationTokenCreateInputFields,
+});
+
+export const VerificationTokenUpdateInputFields = (t: any) => ({
+  tokenHash: t.field({"required":false,"type":StringFieldUpdateOperationsInput}),
+  expiresAt: t.field({"required":false,"type":DateTimeFieldUpdateOperationsInput}),
+  user: t.field({"required":false,"type":UserUpdateOneRequiredWithoutVerificationTokenNestedInput}),
+});
+export const VerificationTokenUpdateInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenUpdateInput>, false>('VerificationTokenUpdateInput').implement({
+  fields: VerificationTokenUpdateInputFields,
+});
+
+export const VerificationTokenCreateManyInputFields = (t: any) => ({
+  id: t.int({"required":false}),
+  userId: t.int({"required":true}),
+  tokenHash: t.string({"required":true}),
+  expiresAt: t.field({"required":true,"type":DateTime}),
+});
+export const VerificationTokenCreateManyInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenCreateManyInput>, false>('VerificationTokenCreateManyInput').implement({
+  fields: VerificationTokenCreateManyInputFields,
+});
+
+export const VerificationTokenUpdateManyMutationInputFields = (t: any) => ({
+  tokenHash: t.field({"required":false,"type":StringFieldUpdateOperationsInput}),
+  expiresAt: t.field({"required":false,"type":DateTimeFieldUpdateOperationsInput}),
+});
+export const VerificationTokenUpdateManyMutationInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenUpdateManyMutationInput>, false>('VerificationTokenUpdateManyMutationInput').implement({
+  fields: VerificationTokenUpdateManyMutationInputFields,
+});
+
 export const IntFilterFields = (t: any) => ({
   equals: t.int({"required":false}),
   in: t.intList({"required":false}),
@@ -808,6 +1032,24 @@ export const AccountListRelationFilter = builder.inputRef<PrismaUpdateOperations
   fields: AccountListRelationFilterFields,
 });
 
+export const PasswordResetTokenListRelationFilterFields = (t: any) => ({
+  every: t.field({"required":false,"type":PasswordResetTokenWhereInput}),
+  some: t.field({"required":false,"type":PasswordResetTokenWhereInput}),
+  none: t.field({"required":false,"type":PasswordResetTokenWhereInput}),
+});
+export const PasswordResetTokenListRelationFilter = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenListRelationFilter>, false>('PasswordResetTokenListRelationFilter').implement({
+  fields: PasswordResetTokenListRelationFilterFields,
+});
+
+export const VerificationTokenListRelationFilterFields = (t: any) => ({
+  every: t.field({"required":false,"type":VerificationTokenWhereInput}),
+  some: t.field({"required":false,"type":VerificationTokenWhereInput}),
+  none: t.field({"required":false,"type":VerificationTokenWhereInput}),
+});
+export const VerificationTokenListRelationFilter = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenListRelationFilter>, false>('VerificationTokenListRelationFilter').implement({
+  fields: VerificationTokenListRelationFilterFields,
+});
+
 export const UserRoleOrderByRelationAggregateInputFields = (t: any) => ({
   _count: t.field({"required":false,"type":SortOrder}),
 });
@@ -820,6 +1062,20 @@ export const AccountOrderByRelationAggregateInputFields = (t: any) => ({
 });
 export const AccountOrderByRelationAggregateInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.AccountOrderByRelationAggregateInput>, false>('AccountOrderByRelationAggregateInput').implement({
   fields: AccountOrderByRelationAggregateInputFields,
+});
+
+export const PasswordResetTokenOrderByRelationAggregateInputFields = (t: any) => ({
+  _count: t.field({"required":false,"type":SortOrder}),
+});
+export const PasswordResetTokenOrderByRelationAggregateInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenOrderByRelationAggregateInput>, false>('PasswordResetTokenOrderByRelationAggregateInput').implement({
+  fields: PasswordResetTokenOrderByRelationAggregateInputFields,
+});
+
+export const VerificationTokenOrderByRelationAggregateInputFields = (t: any) => ({
+  _count: t.field({"required":false,"type":SortOrder}),
+});
+export const VerificationTokenOrderByRelationAggregateInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenOrderByRelationAggregateInput>, false>('VerificationTokenOrderByRelationAggregateInput').implement({
+  fields: VerificationTokenOrderByRelationAggregateInputFields,
 });
 
 export const UserCountOrderByAggregateInputFields = (t: any) => ({
@@ -1283,6 +1539,98 @@ export const RolePermissionSumOrderByAggregateInput = builder.inputRef<PrismaUpd
   fields: RolePermissionSumOrderByAggregateInputFields,
 });
 
+export const PasswordResetTokenCountOrderByAggregateInputFields = (t: any) => ({
+  id: t.field({"required":false,"type":SortOrder}),
+  userId: t.field({"required":false,"type":SortOrder}),
+  tokenHash: t.field({"required":false,"type":SortOrder}),
+  expiresAt: t.field({"required":false,"type":SortOrder}),
+});
+export const PasswordResetTokenCountOrderByAggregateInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenCountOrderByAggregateInput>, false>('PasswordResetTokenCountOrderByAggregateInput').implement({
+  fields: PasswordResetTokenCountOrderByAggregateInputFields,
+});
+
+export const PasswordResetTokenAvgOrderByAggregateInputFields = (t: any) => ({
+  id: t.field({"required":false,"type":SortOrder}),
+  userId: t.field({"required":false,"type":SortOrder}),
+});
+export const PasswordResetTokenAvgOrderByAggregateInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenAvgOrderByAggregateInput>, false>('PasswordResetTokenAvgOrderByAggregateInput').implement({
+  fields: PasswordResetTokenAvgOrderByAggregateInputFields,
+});
+
+export const PasswordResetTokenMaxOrderByAggregateInputFields = (t: any) => ({
+  id: t.field({"required":false,"type":SortOrder}),
+  userId: t.field({"required":false,"type":SortOrder}),
+  tokenHash: t.field({"required":false,"type":SortOrder}),
+  expiresAt: t.field({"required":false,"type":SortOrder}),
+});
+export const PasswordResetTokenMaxOrderByAggregateInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenMaxOrderByAggregateInput>, false>('PasswordResetTokenMaxOrderByAggregateInput').implement({
+  fields: PasswordResetTokenMaxOrderByAggregateInputFields,
+});
+
+export const PasswordResetTokenMinOrderByAggregateInputFields = (t: any) => ({
+  id: t.field({"required":false,"type":SortOrder}),
+  userId: t.field({"required":false,"type":SortOrder}),
+  tokenHash: t.field({"required":false,"type":SortOrder}),
+  expiresAt: t.field({"required":false,"type":SortOrder}),
+});
+export const PasswordResetTokenMinOrderByAggregateInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenMinOrderByAggregateInput>, false>('PasswordResetTokenMinOrderByAggregateInput').implement({
+  fields: PasswordResetTokenMinOrderByAggregateInputFields,
+});
+
+export const PasswordResetTokenSumOrderByAggregateInputFields = (t: any) => ({
+  id: t.field({"required":false,"type":SortOrder}),
+  userId: t.field({"required":false,"type":SortOrder}),
+});
+export const PasswordResetTokenSumOrderByAggregateInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenSumOrderByAggregateInput>, false>('PasswordResetTokenSumOrderByAggregateInput').implement({
+  fields: PasswordResetTokenSumOrderByAggregateInputFields,
+});
+
+export const VerificationTokenCountOrderByAggregateInputFields = (t: any) => ({
+  id: t.field({"required":false,"type":SortOrder}),
+  userId: t.field({"required":false,"type":SortOrder}),
+  tokenHash: t.field({"required":false,"type":SortOrder}),
+  expiresAt: t.field({"required":false,"type":SortOrder}),
+});
+export const VerificationTokenCountOrderByAggregateInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenCountOrderByAggregateInput>, false>('VerificationTokenCountOrderByAggregateInput').implement({
+  fields: VerificationTokenCountOrderByAggregateInputFields,
+});
+
+export const VerificationTokenAvgOrderByAggregateInputFields = (t: any) => ({
+  id: t.field({"required":false,"type":SortOrder}),
+  userId: t.field({"required":false,"type":SortOrder}),
+});
+export const VerificationTokenAvgOrderByAggregateInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenAvgOrderByAggregateInput>, false>('VerificationTokenAvgOrderByAggregateInput').implement({
+  fields: VerificationTokenAvgOrderByAggregateInputFields,
+});
+
+export const VerificationTokenMaxOrderByAggregateInputFields = (t: any) => ({
+  id: t.field({"required":false,"type":SortOrder}),
+  userId: t.field({"required":false,"type":SortOrder}),
+  tokenHash: t.field({"required":false,"type":SortOrder}),
+  expiresAt: t.field({"required":false,"type":SortOrder}),
+});
+export const VerificationTokenMaxOrderByAggregateInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenMaxOrderByAggregateInput>, false>('VerificationTokenMaxOrderByAggregateInput').implement({
+  fields: VerificationTokenMaxOrderByAggregateInputFields,
+});
+
+export const VerificationTokenMinOrderByAggregateInputFields = (t: any) => ({
+  id: t.field({"required":false,"type":SortOrder}),
+  userId: t.field({"required":false,"type":SortOrder}),
+  tokenHash: t.field({"required":false,"type":SortOrder}),
+  expiresAt: t.field({"required":false,"type":SortOrder}),
+});
+export const VerificationTokenMinOrderByAggregateInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenMinOrderByAggregateInput>, false>('VerificationTokenMinOrderByAggregateInput').implement({
+  fields: VerificationTokenMinOrderByAggregateInputFields,
+});
+
+export const VerificationTokenSumOrderByAggregateInputFields = (t: any) => ({
+  id: t.field({"required":false,"type":SortOrder}),
+  userId: t.field({"required":false,"type":SortOrder}),
+});
+export const VerificationTokenSumOrderByAggregateInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenSumOrderByAggregateInput>, false>('VerificationTokenSumOrderByAggregateInput').implement({
+  fields: VerificationTokenSumOrderByAggregateInputFields,
+});
+
 export const UserRoleCreateNestedManyWithoutUserInputFields = (t: any) => ({
   create: t.field({"required":false,"type":[UserRoleCreateWithoutUserInput]}),
   connectOrCreate: t.field({"required":false,"type":[UserRoleCreateOrConnectWithoutUserInput]}),
@@ -1301,6 +1649,26 @@ export const AccountCreateNestedManyWithoutUserInputFields = (t: any) => ({
 });
 export const AccountCreateNestedManyWithoutUserInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.AccountCreateNestedManyWithoutUserInput>, false>('AccountCreateNestedManyWithoutUserInput').implement({
   fields: AccountCreateNestedManyWithoutUserInputFields,
+});
+
+export const PasswordResetTokenCreateNestedManyWithoutUserInputFields = (t: any) => ({
+  create: t.field({"required":false,"type":[PasswordResetTokenCreateWithoutUserInput]}),
+  connectOrCreate: t.field({"required":false,"type":[PasswordResetTokenCreateOrConnectWithoutUserInput]}),
+  createMany: t.field({"required":false,"type":PasswordResetTokenCreateManyUserInputEnvelope}),
+  connect: t.field({"required":false,"type":[PasswordResetTokenWhereUniqueInput]}),
+});
+export const PasswordResetTokenCreateNestedManyWithoutUserInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput>, false>('PasswordResetTokenCreateNestedManyWithoutUserInput').implement({
+  fields: PasswordResetTokenCreateNestedManyWithoutUserInputFields,
+});
+
+export const VerificationTokenCreateNestedManyWithoutUserInputFields = (t: any) => ({
+  create: t.field({"required":false,"type":[VerificationTokenCreateWithoutUserInput]}),
+  connectOrCreate: t.field({"required":false,"type":[VerificationTokenCreateOrConnectWithoutUserInput]}),
+  createMany: t.field({"required":false,"type":VerificationTokenCreateManyUserInputEnvelope}),
+  connect: t.field({"required":false,"type":[VerificationTokenWhereUniqueInput]}),
+});
+export const VerificationTokenCreateNestedManyWithoutUserInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenCreateNestedManyWithoutUserInput>, false>('VerificationTokenCreateNestedManyWithoutUserInput').implement({
+  fields: VerificationTokenCreateNestedManyWithoutUserInputFields,
 });
 
 export const NullableStringFieldUpdateOperationsInputFields = (t: any) => ({
@@ -1349,6 +1717,40 @@ export const AccountUpdateManyWithoutUserNestedInputFields = (t: any) => ({
 });
 export const AccountUpdateManyWithoutUserNestedInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.AccountUpdateManyWithoutUserNestedInput>, false>('AccountUpdateManyWithoutUserNestedInput').implement({
   fields: AccountUpdateManyWithoutUserNestedInputFields,
+});
+
+export const PasswordResetTokenUpdateManyWithoutUserNestedInputFields = (t: any) => ({
+  create: t.field({"required":false,"type":[PasswordResetTokenCreateWithoutUserInput]}),
+  connectOrCreate: t.field({"required":false,"type":[PasswordResetTokenCreateOrConnectWithoutUserInput]}),
+  upsert: t.field({"required":false,"type":[PasswordResetTokenUpsertWithWhereUniqueWithoutUserInput]}),
+  createMany: t.field({"required":false,"type":PasswordResetTokenCreateManyUserInputEnvelope}),
+  set: t.field({"required":false,"type":[PasswordResetTokenWhereUniqueInput]}),
+  disconnect: t.field({"required":false,"type":[PasswordResetTokenWhereUniqueInput]}),
+  delete: t.field({"required":false,"type":[PasswordResetTokenWhereUniqueInput]}),
+  connect: t.field({"required":false,"type":[PasswordResetTokenWhereUniqueInput]}),
+  update: t.field({"required":false,"type":[PasswordResetTokenUpdateWithWhereUniqueWithoutUserInput]}),
+  updateMany: t.field({"required":false,"type":[PasswordResetTokenUpdateManyWithWhereWithoutUserInput]}),
+  deleteMany: t.field({"required":false,"type":[PasswordResetTokenScalarWhereInput]}),
+});
+export const PasswordResetTokenUpdateManyWithoutUserNestedInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput>, false>('PasswordResetTokenUpdateManyWithoutUserNestedInput').implement({
+  fields: PasswordResetTokenUpdateManyWithoutUserNestedInputFields,
+});
+
+export const VerificationTokenUpdateManyWithoutUserNestedInputFields = (t: any) => ({
+  create: t.field({"required":false,"type":[VerificationTokenCreateWithoutUserInput]}),
+  connectOrCreate: t.field({"required":false,"type":[VerificationTokenCreateOrConnectWithoutUserInput]}),
+  upsert: t.field({"required":false,"type":[VerificationTokenUpsertWithWhereUniqueWithoutUserInput]}),
+  createMany: t.field({"required":false,"type":VerificationTokenCreateManyUserInputEnvelope}),
+  set: t.field({"required":false,"type":[VerificationTokenWhereUniqueInput]}),
+  disconnect: t.field({"required":false,"type":[VerificationTokenWhereUniqueInput]}),
+  delete: t.field({"required":false,"type":[VerificationTokenWhereUniqueInput]}),
+  connect: t.field({"required":false,"type":[VerificationTokenWhereUniqueInput]}),
+  update: t.field({"required":false,"type":[VerificationTokenUpdateWithWhereUniqueWithoutUserInput]}),
+  updateMany: t.field({"required":false,"type":[VerificationTokenUpdateManyWithWhereWithoutUserInput]}),
+  deleteMany: t.field({"required":false,"type":[VerificationTokenScalarWhereInput]}),
+});
+export const VerificationTokenUpdateManyWithoutUserNestedInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenUpdateManyWithoutUserNestedInput>, false>('VerificationTokenUpdateManyWithoutUserNestedInput').implement({
+  fields: VerificationTokenUpdateManyWithoutUserNestedInputFields,
 });
 
 export const IntFieldUpdateOperationsInputFields = (t: any) => ({
@@ -1555,6 +1957,46 @@ export const PermissionUpdateOneRequiredWithoutRolesNestedInputFields = (t: any)
 });
 export const PermissionUpdateOneRequiredWithoutRolesNestedInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PermissionUpdateOneRequiredWithoutRolesNestedInput>, false>('PermissionUpdateOneRequiredWithoutRolesNestedInput').implement({
   fields: PermissionUpdateOneRequiredWithoutRolesNestedInputFields,
+});
+
+export const UserCreateNestedOneWithoutPasswordResetTokenInputFields = (t: any) => ({
+  create: t.field({"required":false,"type":UserCreateWithoutPasswordResetTokenInput}),
+  connectOrCreate: t.field({"required":false,"type":UserCreateOrConnectWithoutPasswordResetTokenInput}),
+  connect: t.field({"required":false,"type":UserWhereUniqueInput}),
+});
+export const UserCreateNestedOneWithoutPasswordResetTokenInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.UserCreateNestedOneWithoutPasswordResetTokenInput>, false>('UserCreateNestedOneWithoutPasswordResetTokenInput').implement({
+  fields: UserCreateNestedOneWithoutPasswordResetTokenInputFields,
+});
+
+export const UserUpdateOneRequiredWithoutPasswordResetTokenNestedInputFields = (t: any) => ({
+  create: t.field({"required":false,"type":UserCreateWithoutPasswordResetTokenInput}),
+  connectOrCreate: t.field({"required":false,"type":UserCreateOrConnectWithoutPasswordResetTokenInput}),
+  upsert: t.field({"required":false,"type":UserUpsertWithoutPasswordResetTokenInput}),
+  connect: t.field({"required":false,"type":UserWhereUniqueInput}),
+  update: t.field({"required":false,"type":UserUpdateToOneWithWhereWithoutPasswordResetTokenInput}),
+});
+export const UserUpdateOneRequiredWithoutPasswordResetTokenNestedInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.UserUpdateOneRequiredWithoutPasswordResetTokenNestedInput>, false>('UserUpdateOneRequiredWithoutPasswordResetTokenNestedInput').implement({
+  fields: UserUpdateOneRequiredWithoutPasswordResetTokenNestedInputFields,
+});
+
+export const UserCreateNestedOneWithoutVerificationTokenInputFields = (t: any) => ({
+  create: t.field({"required":false,"type":UserCreateWithoutVerificationTokenInput}),
+  connectOrCreate: t.field({"required":false,"type":UserCreateOrConnectWithoutVerificationTokenInput}),
+  connect: t.field({"required":false,"type":UserWhereUniqueInput}),
+});
+export const UserCreateNestedOneWithoutVerificationTokenInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.UserCreateNestedOneWithoutVerificationTokenInput>, false>('UserCreateNestedOneWithoutVerificationTokenInput').implement({
+  fields: UserCreateNestedOneWithoutVerificationTokenInputFields,
+});
+
+export const UserUpdateOneRequiredWithoutVerificationTokenNestedInputFields = (t: any) => ({
+  create: t.field({"required":false,"type":UserCreateWithoutVerificationTokenInput}),
+  connectOrCreate: t.field({"required":false,"type":UserCreateOrConnectWithoutVerificationTokenInput}),
+  upsert: t.field({"required":false,"type":UserUpsertWithoutVerificationTokenInput}),
+  connect: t.field({"required":false,"type":UserWhereUniqueInput}),
+  update: t.field({"required":false,"type":UserUpdateToOneWithWhereWithoutVerificationTokenInput}),
+});
+export const UserUpdateOneRequiredWithoutVerificationTokenNestedInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.UserUpdateOneRequiredWithoutVerificationTokenNestedInput>, false>('UserUpdateOneRequiredWithoutVerificationTokenNestedInput').implement({
+  fields: UserUpdateOneRequiredWithoutVerificationTokenNestedInputFields,
 });
 
 export const NestedIntFilterFields = (t: any) => ({
@@ -1804,6 +2246,54 @@ export const AccountCreateManyUserInputEnvelope = builder.inputRef<PrismaUpdateO
   fields: AccountCreateManyUserInputEnvelopeFields,
 });
 
+export const PasswordResetTokenCreateWithoutUserInputFields = (t: any) => ({
+  tokenHash: t.string({"required":true}),
+  expiresAt: t.field({"required":true,"type":DateTime}),
+});
+export const PasswordResetTokenCreateWithoutUserInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenCreateWithoutUserInput>, false>('PasswordResetTokenCreateWithoutUserInput').implement({
+  fields: PasswordResetTokenCreateWithoutUserInputFields,
+});
+
+export const PasswordResetTokenCreateOrConnectWithoutUserInputFields = (t: any) => ({
+  where: t.field({"required":true,"type":PasswordResetTokenWhereUniqueInput}),
+  create: t.field({"required":true,"type":PasswordResetTokenCreateWithoutUserInput}),
+});
+export const PasswordResetTokenCreateOrConnectWithoutUserInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenCreateOrConnectWithoutUserInput>, false>('PasswordResetTokenCreateOrConnectWithoutUserInput').implement({
+  fields: PasswordResetTokenCreateOrConnectWithoutUserInputFields,
+});
+
+export const PasswordResetTokenCreateManyUserInputEnvelopeFields = (t: any) => ({
+  data: t.field({"required":true,"type":[PasswordResetTokenCreateManyUserInput]}),
+  skipDuplicates: t.boolean({"required":false}),
+});
+export const PasswordResetTokenCreateManyUserInputEnvelope = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenCreateManyUserInputEnvelope>, false>('PasswordResetTokenCreateManyUserInputEnvelope').implement({
+  fields: PasswordResetTokenCreateManyUserInputEnvelopeFields,
+});
+
+export const VerificationTokenCreateWithoutUserInputFields = (t: any) => ({
+  tokenHash: t.string({"required":true}),
+  expiresAt: t.field({"required":true,"type":DateTime}),
+});
+export const VerificationTokenCreateWithoutUserInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenCreateWithoutUserInput>, false>('VerificationTokenCreateWithoutUserInput').implement({
+  fields: VerificationTokenCreateWithoutUserInputFields,
+});
+
+export const VerificationTokenCreateOrConnectWithoutUserInputFields = (t: any) => ({
+  where: t.field({"required":true,"type":VerificationTokenWhereUniqueInput}),
+  create: t.field({"required":true,"type":VerificationTokenCreateWithoutUserInput}),
+});
+export const VerificationTokenCreateOrConnectWithoutUserInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenCreateOrConnectWithoutUserInput>, false>('VerificationTokenCreateOrConnectWithoutUserInput').implement({
+  fields: VerificationTokenCreateOrConnectWithoutUserInputFields,
+});
+
+export const VerificationTokenCreateManyUserInputEnvelopeFields = (t: any) => ({
+  data: t.field({"required":true,"type":[VerificationTokenCreateManyUserInput]}),
+  skipDuplicates: t.boolean({"required":false}),
+});
+export const VerificationTokenCreateManyUserInputEnvelope = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenCreateManyUserInputEnvelope>, false>('VerificationTokenCreateManyUserInputEnvelope').implement({
+  fields: VerificationTokenCreateManyUserInputEnvelopeFields,
+});
+
 export const UserRoleUpsertWithWhereUniqueWithoutUserInputFields = (t: any) => ({
   where: t.field({"required":true,"type":UserRoleWhereUniqueInput}),
   update: t.field({"required":true,"type":UserRoleUpdateWithoutUserInput}),
@@ -1881,6 +2371,82 @@ export const AccountScalarWhereInput = builder.inputRef<PrismaUpdateOperationsIn
   fields: AccountScalarWhereInputFields,
 });
 
+export const PasswordResetTokenUpsertWithWhereUniqueWithoutUserInputFields = (t: any) => ({
+  where: t.field({"required":true,"type":PasswordResetTokenWhereUniqueInput}),
+  update: t.field({"required":true,"type":PasswordResetTokenUpdateWithoutUserInput}),
+  create: t.field({"required":true,"type":PasswordResetTokenCreateWithoutUserInput}),
+});
+export const PasswordResetTokenUpsertWithWhereUniqueWithoutUserInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenUpsertWithWhereUniqueWithoutUserInput>, false>('PasswordResetTokenUpsertWithWhereUniqueWithoutUserInput').implement({
+  fields: PasswordResetTokenUpsertWithWhereUniqueWithoutUserInputFields,
+});
+
+export const PasswordResetTokenUpdateWithWhereUniqueWithoutUserInputFields = (t: any) => ({
+  where: t.field({"required":true,"type":PasswordResetTokenWhereUniqueInput}),
+  data: t.field({"required":true,"type":PasswordResetTokenUpdateWithoutUserInput}),
+});
+export const PasswordResetTokenUpdateWithWhereUniqueWithoutUserInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenUpdateWithWhereUniqueWithoutUserInput>, false>('PasswordResetTokenUpdateWithWhereUniqueWithoutUserInput').implement({
+  fields: PasswordResetTokenUpdateWithWhereUniqueWithoutUserInputFields,
+});
+
+export const PasswordResetTokenUpdateManyWithWhereWithoutUserInputFields = (t: any) => ({
+  where: t.field({"required":true,"type":PasswordResetTokenScalarWhereInput}),
+  data: t.field({"required":true,"type":PasswordResetTokenUpdateManyMutationInput}),
+});
+export const PasswordResetTokenUpdateManyWithWhereWithoutUserInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenUpdateManyWithWhereWithoutUserInput>, false>('PasswordResetTokenUpdateManyWithWhereWithoutUserInput').implement({
+  fields: PasswordResetTokenUpdateManyWithWhereWithoutUserInputFields,
+});
+
+export const PasswordResetTokenScalarWhereInputFields = (t: any) => ({
+  AND: t.field({"required":false,"type":[PasswordResetTokenScalarWhereInput]}),
+  OR: t.field({"required":false,"type":[PasswordResetTokenScalarWhereInput]}),
+  NOT: t.field({"required":false,"type":[PasswordResetTokenScalarWhereInput]}),
+  id: t.field({"required":false,"type":IntFilter}),
+  userId: t.field({"required":false,"type":IntFilter}),
+  tokenHash: t.field({"required":false,"type":StringFilter}),
+  expiresAt: t.field({"required":false,"type":DateTimeFilter}),
+});
+export const PasswordResetTokenScalarWhereInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenScalarWhereInput>, false>('PasswordResetTokenScalarWhereInput').implement({
+  fields: PasswordResetTokenScalarWhereInputFields,
+});
+
+export const VerificationTokenUpsertWithWhereUniqueWithoutUserInputFields = (t: any) => ({
+  where: t.field({"required":true,"type":VerificationTokenWhereUniqueInput}),
+  update: t.field({"required":true,"type":VerificationTokenUpdateWithoutUserInput}),
+  create: t.field({"required":true,"type":VerificationTokenCreateWithoutUserInput}),
+});
+export const VerificationTokenUpsertWithWhereUniqueWithoutUserInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenUpsertWithWhereUniqueWithoutUserInput>, false>('VerificationTokenUpsertWithWhereUniqueWithoutUserInput').implement({
+  fields: VerificationTokenUpsertWithWhereUniqueWithoutUserInputFields,
+});
+
+export const VerificationTokenUpdateWithWhereUniqueWithoutUserInputFields = (t: any) => ({
+  where: t.field({"required":true,"type":VerificationTokenWhereUniqueInput}),
+  data: t.field({"required":true,"type":VerificationTokenUpdateWithoutUserInput}),
+});
+export const VerificationTokenUpdateWithWhereUniqueWithoutUserInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenUpdateWithWhereUniqueWithoutUserInput>, false>('VerificationTokenUpdateWithWhereUniqueWithoutUserInput').implement({
+  fields: VerificationTokenUpdateWithWhereUniqueWithoutUserInputFields,
+});
+
+export const VerificationTokenUpdateManyWithWhereWithoutUserInputFields = (t: any) => ({
+  where: t.field({"required":true,"type":VerificationTokenScalarWhereInput}),
+  data: t.field({"required":true,"type":VerificationTokenUpdateManyMutationInput}),
+});
+export const VerificationTokenUpdateManyWithWhereWithoutUserInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenUpdateManyWithWhereWithoutUserInput>, false>('VerificationTokenUpdateManyWithWhereWithoutUserInput').implement({
+  fields: VerificationTokenUpdateManyWithWhereWithoutUserInputFields,
+});
+
+export const VerificationTokenScalarWhereInputFields = (t: any) => ({
+  AND: t.field({"required":false,"type":[VerificationTokenScalarWhereInput]}),
+  OR: t.field({"required":false,"type":[VerificationTokenScalarWhereInput]}),
+  NOT: t.field({"required":false,"type":[VerificationTokenScalarWhereInput]}),
+  id: t.field({"required":false,"type":IntFilter}),
+  userId: t.field({"required":false,"type":IntFilter}),
+  tokenHash: t.field({"required":false,"type":StringFilter}),
+  expiresAt: t.field({"required":false,"type":DateTimeFilter}),
+});
+export const VerificationTokenScalarWhereInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenScalarWhereInput>, false>('VerificationTokenScalarWhereInput').implement({
+  fields: VerificationTokenScalarWhereInputFields,
+});
+
 export const UserCreateWithoutAccountsInputFields = (t: any) => ({
   email: t.string({"required":false}),
   name: t.string({"required":false}),
@@ -1889,6 +2455,8 @@ export const UserCreateWithoutAccountsInputFields = (t: any) => ({
   createdAt: t.field({"required":false,"type":DateTime}),
   updatedAt: t.field({"required":false,"type":DateTime}),
   roles: t.field({"required":false,"type":UserRoleCreateNestedManyWithoutUserInput}),
+  PasswordResetToken: t.field({"required":false,"type":PasswordResetTokenCreateNestedManyWithoutUserInput}),
+  VerificationToken: t.field({"required":false,"type":VerificationTokenCreateNestedManyWithoutUserInput}),
 });
 export const UserCreateWithoutAccountsInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.UserCreateWithoutAccountsInput>, false>('UserCreateWithoutAccountsInput').implement({
   fields: UserCreateWithoutAccountsInputFields,
@@ -1927,6 +2495,8 @@ export const UserUpdateWithoutAccountsInputFields = (t: any) => ({
   createdAt: t.field({"required":false,"type":DateTimeFieldUpdateOperationsInput}),
   updatedAt: t.field({"required":false,"type":DateTimeFieldUpdateOperationsInput}),
   roles: t.field({"required":false,"type":UserRoleUpdateManyWithoutUserNestedInput}),
+  PasswordResetToken: t.field({"required":false,"type":PasswordResetTokenUpdateManyWithoutUserNestedInput}),
+  VerificationToken: t.field({"required":false,"type":VerificationTokenUpdateManyWithoutUserNestedInput}),
 });
 export const UserUpdateWithoutAccountsInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.UserUpdateWithoutAccountsInput>, false>('UserUpdateWithoutAccountsInput').implement({
   fields: UserUpdateWithoutAccountsInputFields,
@@ -2095,6 +2665,8 @@ export const UserCreateWithoutRolesInputFields = (t: any) => ({
   createdAt: t.field({"required":false,"type":DateTime}),
   updatedAt: t.field({"required":false,"type":DateTime}),
   accounts: t.field({"required":false,"type":AccountCreateNestedManyWithoutUserInput}),
+  PasswordResetToken: t.field({"required":false,"type":PasswordResetTokenCreateNestedManyWithoutUserInput}),
+  VerificationToken: t.field({"required":false,"type":VerificationTokenCreateNestedManyWithoutUserInput}),
 });
 export const UserCreateWithoutRolesInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.UserCreateWithoutRolesInput>, false>('UserCreateWithoutRolesInput').implement({
   fields: UserCreateWithoutRolesInputFields,
@@ -2150,6 +2722,8 @@ export const UserUpdateWithoutRolesInputFields = (t: any) => ({
   createdAt: t.field({"required":false,"type":DateTimeFieldUpdateOperationsInput}),
   updatedAt: t.field({"required":false,"type":DateTimeFieldUpdateOperationsInput}),
   accounts: t.field({"required":false,"type":AccountUpdateManyWithoutUserNestedInput}),
+  PasswordResetToken: t.field({"required":false,"type":PasswordResetTokenUpdateManyWithoutUserNestedInput}),
+  VerificationToken: t.field({"required":false,"type":VerificationTokenUpdateManyWithoutUserNestedInput}),
 });
 export const UserUpdateWithoutRolesInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.UserUpdateWithoutRolesInput>, false>('UserUpdateWithoutRolesInput').implement({
   fields: UserUpdateWithoutRolesInputFields,
@@ -2265,6 +2839,116 @@ export const PermissionUpdateWithoutRolesInput = builder.inputRef<PrismaUpdateOp
   fields: PermissionUpdateWithoutRolesInputFields,
 });
 
+export const UserCreateWithoutPasswordResetTokenInputFields = (t: any) => ({
+  email: t.string({"required":false}),
+  name: t.string({"required":false}),
+  image: t.string({"required":false}),
+  password: t.string({"required":false}),
+  createdAt: t.field({"required":false,"type":DateTime}),
+  updatedAt: t.field({"required":false,"type":DateTime}),
+  roles: t.field({"required":false,"type":UserRoleCreateNestedManyWithoutUserInput}),
+  accounts: t.field({"required":false,"type":AccountCreateNestedManyWithoutUserInput}),
+  VerificationToken: t.field({"required":false,"type":VerificationTokenCreateNestedManyWithoutUserInput}),
+});
+export const UserCreateWithoutPasswordResetTokenInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.UserCreateWithoutPasswordResetTokenInput>, false>('UserCreateWithoutPasswordResetTokenInput').implement({
+  fields: UserCreateWithoutPasswordResetTokenInputFields,
+});
+
+export const UserCreateOrConnectWithoutPasswordResetTokenInputFields = (t: any) => ({
+  where: t.field({"required":true,"type":UserWhereUniqueInput}),
+  create: t.field({"required":true,"type":UserCreateWithoutPasswordResetTokenInput}),
+});
+export const UserCreateOrConnectWithoutPasswordResetTokenInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.UserCreateOrConnectWithoutPasswordResetTokenInput>, false>('UserCreateOrConnectWithoutPasswordResetTokenInput').implement({
+  fields: UserCreateOrConnectWithoutPasswordResetTokenInputFields,
+});
+
+export const UserUpsertWithoutPasswordResetTokenInputFields = (t: any) => ({
+  update: t.field({"required":true,"type":UserUpdateWithoutPasswordResetTokenInput}),
+  create: t.field({"required":true,"type":UserCreateWithoutPasswordResetTokenInput}),
+  where: t.field({"required":false,"type":UserWhereInput}),
+});
+export const UserUpsertWithoutPasswordResetTokenInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.UserUpsertWithoutPasswordResetTokenInput>, false>('UserUpsertWithoutPasswordResetTokenInput').implement({
+  fields: UserUpsertWithoutPasswordResetTokenInputFields,
+});
+
+export const UserUpdateToOneWithWhereWithoutPasswordResetTokenInputFields = (t: any) => ({
+  where: t.field({"required":false,"type":UserWhereInput}),
+  data: t.field({"required":true,"type":UserUpdateWithoutPasswordResetTokenInput}),
+});
+export const UserUpdateToOneWithWhereWithoutPasswordResetTokenInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.UserUpdateToOneWithWhereWithoutPasswordResetTokenInput>, false>('UserUpdateToOneWithWhereWithoutPasswordResetTokenInput').implement({
+  fields: UserUpdateToOneWithWhereWithoutPasswordResetTokenInputFields,
+});
+
+export const UserUpdateWithoutPasswordResetTokenInputFields = (t: any) => ({
+  email: t.field({"required":false,"type":NullableStringFieldUpdateOperationsInput}),
+  name: t.field({"required":false,"type":NullableStringFieldUpdateOperationsInput}),
+  image: t.field({"required":false,"type":NullableStringFieldUpdateOperationsInput}),
+  password: t.field({"required":false,"type":NullableStringFieldUpdateOperationsInput}),
+  createdAt: t.field({"required":false,"type":DateTimeFieldUpdateOperationsInput}),
+  updatedAt: t.field({"required":false,"type":DateTimeFieldUpdateOperationsInput}),
+  roles: t.field({"required":false,"type":UserRoleUpdateManyWithoutUserNestedInput}),
+  accounts: t.field({"required":false,"type":AccountUpdateManyWithoutUserNestedInput}),
+  VerificationToken: t.field({"required":false,"type":VerificationTokenUpdateManyWithoutUserNestedInput}),
+});
+export const UserUpdateWithoutPasswordResetTokenInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.UserUpdateWithoutPasswordResetTokenInput>, false>('UserUpdateWithoutPasswordResetTokenInput').implement({
+  fields: UserUpdateWithoutPasswordResetTokenInputFields,
+});
+
+export const UserCreateWithoutVerificationTokenInputFields = (t: any) => ({
+  email: t.string({"required":false}),
+  name: t.string({"required":false}),
+  image: t.string({"required":false}),
+  password: t.string({"required":false}),
+  createdAt: t.field({"required":false,"type":DateTime}),
+  updatedAt: t.field({"required":false,"type":DateTime}),
+  roles: t.field({"required":false,"type":UserRoleCreateNestedManyWithoutUserInput}),
+  accounts: t.field({"required":false,"type":AccountCreateNestedManyWithoutUserInput}),
+  PasswordResetToken: t.field({"required":false,"type":PasswordResetTokenCreateNestedManyWithoutUserInput}),
+});
+export const UserCreateWithoutVerificationTokenInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.UserCreateWithoutVerificationTokenInput>, false>('UserCreateWithoutVerificationTokenInput').implement({
+  fields: UserCreateWithoutVerificationTokenInputFields,
+});
+
+export const UserCreateOrConnectWithoutVerificationTokenInputFields = (t: any) => ({
+  where: t.field({"required":true,"type":UserWhereUniqueInput}),
+  create: t.field({"required":true,"type":UserCreateWithoutVerificationTokenInput}),
+});
+export const UserCreateOrConnectWithoutVerificationTokenInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.UserCreateOrConnectWithoutVerificationTokenInput>, false>('UserCreateOrConnectWithoutVerificationTokenInput').implement({
+  fields: UserCreateOrConnectWithoutVerificationTokenInputFields,
+});
+
+export const UserUpsertWithoutVerificationTokenInputFields = (t: any) => ({
+  update: t.field({"required":true,"type":UserUpdateWithoutVerificationTokenInput}),
+  create: t.field({"required":true,"type":UserCreateWithoutVerificationTokenInput}),
+  where: t.field({"required":false,"type":UserWhereInput}),
+});
+export const UserUpsertWithoutVerificationTokenInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.UserUpsertWithoutVerificationTokenInput>, false>('UserUpsertWithoutVerificationTokenInput').implement({
+  fields: UserUpsertWithoutVerificationTokenInputFields,
+});
+
+export const UserUpdateToOneWithWhereWithoutVerificationTokenInputFields = (t: any) => ({
+  where: t.field({"required":false,"type":UserWhereInput}),
+  data: t.field({"required":true,"type":UserUpdateWithoutVerificationTokenInput}),
+});
+export const UserUpdateToOneWithWhereWithoutVerificationTokenInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.UserUpdateToOneWithWhereWithoutVerificationTokenInput>, false>('UserUpdateToOneWithWhereWithoutVerificationTokenInput').implement({
+  fields: UserUpdateToOneWithWhereWithoutVerificationTokenInputFields,
+});
+
+export const UserUpdateWithoutVerificationTokenInputFields = (t: any) => ({
+  email: t.field({"required":false,"type":NullableStringFieldUpdateOperationsInput}),
+  name: t.field({"required":false,"type":NullableStringFieldUpdateOperationsInput}),
+  image: t.field({"required":false,"type":NullableStringFieldUpdateOperationsInput}),
+  password: t.field({"required":false,"type":NullableStringFieldUpdateOperationsInput}),
+  createdAt: t.field({"required":false,"type":DateTimeFieldUpdateOperationsInput}),
+  updatedAt: t.field({"required":false,"type":DateTimeFieldUpdateOperationsInput}),
+  roles: t.field({"required":false,"type":UserRoleUpdateManyWithoutUserNestedInput}),
+  accounts: t.field({"required":false,"type":AccountUpdateManyWithoutUserNestedInput}),
+  PasswordResetToken: t.field({"required":false,"type":PasswordResetTokenUpdateManyWithoutUserNestedInput}),
+});
+export const UserUpdateWithoutVerificationTokenInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.UserUpdateWithoutVerificationTokenInput>, false>('UserUpdateWithoutVerificationTokenInput').implement({
+  fields: UserUpdateWithoutVerificationTokenInputFields,
+});
+
 export const UserRoleCreateManyUserInputFields = (t: any) => ({
   roleId: t.int({"required":true}),
 });
@@ -2284,6 +2968,24 @@ export const AccountCreateManyUserInput = builder.inputRef<PrismaUpdateOperation
   fields: AccountCreateManyUserInputFields,
 });
 
+export const PasswordResetTokenCreateManyUserInputFields = (t: any) => ({
+  id: t.int({"required":false}),
+  tokenHash: t.string({"required":true}),
+  expiresAt: t.field({"required":true,"type":DateTime}),
+});
+export const PasswordResetTokenCreateManyUserInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenCreateManyUserInput>, false>('PasswordResetTokenCreateManyUserInput').implement({
+  fields: PasswordResetTokenCreateManyUserInputFields,
+});
+
+export const VerificationTokenCreateManyUserInputFields = (t: any) => ({
+  id: t.int({"required":false}),
+  tokenHash: t.string({"required":true}),
+  expiresAt: t.field({"required":true,"type":DateTime}),
+});
+export const VerificationTokenCreateManyUserInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenCreateManyUserInput>, false>('VerificationTokenCreateManyUserInput').implement({
+  fields: VerificationTokenCreateManyUserInputFields,
+});
+
 export const UserRoleUpdateWithoutUserInputFields = (t: any) => ({
   role: t.field({"required":false,"type":RoleUpdateOneRequiredWithoutUsersNestedInput}),
 });
@@ -2300,6 +3002,22 @@ export const AccountUpdateWithoutUserInputFields = (t: any) => ({
 });
 export const AccountUpdateWithoutUserInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.AccountUpdateWithoutUserInput>, false>('AccountUpdateWithoutUserInput').implement({
   fields: AccountUpdateWithoutUserInputFields,
+});
+
+export const PasswordResetTokenUpdateWithoutUserInputFields = (t: any) => ({
+  tokenHash: t.field({"required":false,"type":StringFieldUpdateOperationsInput}),
+  expiresAt: t.field({"required":false,"type":DateTimeFieldUpdateOperationsInput}),
+});
+export const PasswordResetTokenUpdateWithoutUserInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.PasswordResetTokenUpdateWithoutUserInput>, false>('PasswordResetTokenUpdateWithoutUserInput').implement({
+  fields: PasswordResetTokenUpdateWithoutUserInputFields,
+});
+
+export const VerificationTokenUpdateWithoutUserInputFields = (t: any) => ({
+  tokenHash: t.field({"required":false,"type":StringFieldUpdateOperationsInput}),
+  expiresAt: t.field({"required":false,"type":DateTimeFieldUpdateOperationsInput}),
+});
+export const VerificationTokenUpdateWithoutUserInput = builder.inputRef<PrismaUpdateOperationsInputFilter<Prisma.VerificationTokenUpdateWithoutUserInput>, false>('VerificationTokenUpdateWithoutUserInput').implement({
+  fields: VerificationTokenUpdateWithoutUserInputFields,
 });
 
 export const UserRoleCreateManyRoleInputFields = (t: any) => ({

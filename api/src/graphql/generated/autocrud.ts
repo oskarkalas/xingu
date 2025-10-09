@@ -4,6 +4,8 @@ import * as Role from './Role';
 import * as Permission from './Permission';
 import * as UserRole from './UserRole';
 import * as RolePermission from './RolePermission';
+import * as PasswordResetToken from './PasswordResetToken';
+import * as VerificationToken from './VerificationToken';
 import { builder } from '../builder';
 import * as Objects from './objects';
 
@@ -123,6 +125,42 @@ export const Cruds: Record<
       updateMany: RolePermission.updateManyRolePermissionMutationObject,
       updateOne: RolePermission.updateOneRolePermissionMutationObject,
       upsertOne: RolePermission.upsertOneRolePermissionMutationObject,
+    },
+  },
+  PasswordResetToken: {
+    Object: PasswordResetToken.PasswordResetTokenObject,
+    queries: {
+      findFirst: PasswordResetToken.findFirstPasswordResetTokenQueryObject,
+      findMany: PasswordResetToken.findManyPasswordResetTokenQueryObject,
+      count: PasswordResetToken.countPasswordResetTokenQueryObject,
+      findUnique: PasswordResetToken.findUniquePasswordResetTokenQueryObject,
+    },
+    mutations: {
+      createMany: PasswordResetToken.createManyPasswordResetTokenMutationObject,
+      createOne: PasswordResetToken.createOnePasswordResetTokenMutationObject,
+      deleteMany: PasswordResetToken.deleteManyPasswordResetTokenMutationObject,
+      deleteOne: PasswordResetToken.deleteOnePasswordResetTokenMutationObject,
+      updateMany: PasswordResetToken.updateManyPasswordResetTokenMutationObject,
+      updateOne: PasswordResetToken.updateOnePasswordResetTokenMutationObject,
+      upsertOne: PasswordResetToken.upsertOnePasswordResetTokenMutationObject,
+    },
+  },
+  VerificationToken: {
+    Object: VerificationToken.VerificationTokenObject,
+    queries: {
+      findFirst: VerificationToken.findFirstVerificationTokenQueryObject,
+      findMany: VerificationToken.findManyVerificationTokenQueryObject,
+      count: VerificationToken.countVerificationTokenQueryObject,
+      findUnique: VerificationToken.findUniqueVerificationTokenQueryObject,
+    },
+    mutations: {
+      createMany: VerificationToken.createManyVerificationTokenMutationObject,
+      createOne: VerificationToken.createOneVerificationTokenMutationObject,
+      deleteMany: VerificationToken.deleteManyVerificationTokenMutationObject,
+      deleteOne: VerificationToken.deleteOneVerificationTokenMutationObject,
+      updateMany: VerificationToken.updateManyVerificationTokenMutationObject,
+      updateOne: VerificationToken.updateOneVerificationTokenMutationObject,
+      upsertOne: VerificationToken.upsertOneVerificationTokenMutationObject,
     },
   },
 };

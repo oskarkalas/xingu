@@ -3,36 +3,33 @@ import PrismaPlugin from '@pothos/plugin-prisma';
 import PrismaTypes from './generated/pothos-types';
 import ScopeAuthPlugin from '@pothos/plugin-scope-auth';
 import { prisma } from '../prisma.client';
-import { Request, Response } from 'express';
+import { PrismaClient } from '@prisma/client';
+
+export interface GraphQLContext {
+  user?: {
+    id: number;
+    roles: string[];
+    permissions: string[];
+  };
+  prisma: PrismaClient;
+}
 
 export const builder = new SchemaBuilder<{
   PrismaTypes: PrismaTypes;
   Scalars: {
     DateTime: { Input: Date; Output: Date };
   };
-  Context: {
-    req: Request;
-    res: Response;
-    user?: {
-      id: number;
-      role: string;
-    };
-  };
-  AuthScopes: {
-    admin: boolean;
-    user: boolean;
-    editor: boolean;
-  };
+  Context: GraphQLContext;
 }>({
   plugins: [PrismaPlugin, ScopeAuthPlugin],
   prisma: {
     client: prisma,
   },
   scopeAuth: {
-    authScopes: async (context) => ({
-      admin: context.user?.role === 'admin',
-      user: !!context.user,
-      editor: context.user?.role === 'editor',
+    authScopes: async (ctx) => ({
+      isAuthenticated: !!ctx.user,
+      hasRole: (r: string) => !!ctx.user?.roles.includes(r),
+      hasPerm: (p: string) => !!ctx.user?.permissions.includes(p),
     }),
   },
 });

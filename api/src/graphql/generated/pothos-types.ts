@@ -1,5 +1,5 @@
 /* eslint-disable */
-import type { Prisma, User, Account, Role, Permission, UserRole, RolePermission } from "@prisma/client";
+import type { Prisma, User, Account, Role, Permission, UserRole, RolePermission, PasswordResetToken, VerificationToken } from "@prisma/client";
 export default interface PrismaTypes {
     User: {
         Name: "User";
@@ -11,8 +11,8 @@ export default interface PrismaTypes {
         Where: Prisma.UserWhereInput;
         Create: {};
         Update: {};
-        RelationName: "roles" | "accounts";
-        ListRelations: "roles" | "accounts";
+        RelationName: "roles" | "accounts" | "PasswordResetToken" | "VerificationToken";
+        ListRelations: "roles" | "accounts" | "PasswordResetToken" | "VerificationToken";
         Relations: {
             roles: {
                 Shape: UserRole[];
@@ -22,6 +22,16 @@ export default interface PrismaTypes {
             accounts: {
                 Shape: Account[];
                 Name: "Account";
+                Nullable: false;
+            };
+            PasswordResetToken: {
+                Shape: PasswordResetToken[];
+                Name: "PasswordResetToken";
+                Nullable: false;
+            };
+            VerificationToken: {
+                Shape: VerificationToken[];
+                Name: "VerificationToken";
                 Nullable: false;
             };
         };
@@ -137,6 +147,46 @@ export default interface PrismaTypes {
             permission: {
                 Shape: Permission;
                 Name: "Permission";
+                Nullable: false;
+            };
+        };
+    };
+    PasswordResetToken: {
+        Name: "PasswordResetToken";
+        Shape: PasswordResetToken;
+        Include: Prisma.PasswordResetTokenInclude;
+        Select: Prisma.PasswordResetTokenSelect;
+        OrderBy: Prisma.PasswordResetTokenOrderByWithRelationInput;
+        WhereUnique: Prisma.PasswordResetTokenWhereUniqueInput;
+        Where: Prisma.PasswordResetTokenWhereInput;
+        Create: {};
+        Update: {};
+        RelationName: "user";
+        ListRelations: never;
+        Relations: {
+            user: {
+                Shape: User;
+                Name: "User";
+                Nullable: false;
+            };
+        };
+    };
+    VerificationToken: {
+        Name: "VerificationToken";
+        Shape: VerificationToken;
+        Include: Prisma.VerificationTokenInclude;
+        Select: Prisma.VerificationTokenSelect;
+        OrderBy: Prisma.VerificationTokenOrderByWithRelationInput;
+        WhereUnique: Prisma.VerificationTokenWhereUniqueInput;
+        Where: Prisma.VerificationTokenWhereInput;
+        Create: {};
+        Update: {};
+        RelationName: "user";
+        ListRelations: never;
+        Relations: {
+            user: {
+                Shape: User;
+                Name: "User";
                 Nullable: false;
             };
         };

@@ -21,22 +21,21 @@ generator pothos {
 generator pothosCrud {
   provider            = "prisma-generator-pothos-codegen"
   generatorConfigPath = "../../pothos.config.js"
-  // optional flags podle potřeby:
-  // builderPath = "@pothos/core"
   prismaPlugin        = "@pothos/plugin-prisma"
-  // exportSimpleTypes = true
 }
 
 model User {
-  id        Int        @id @default(autoincrement())
-  email     String?    @unique
-  name      String?
-  image     String?
-  password  String? // <- uložený hash hesla
-  roles     UserRole[]
-  accounts  Account[]
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  id                 Int                  @id @default(autoincrement())
+  email              String?              @unique
+  name               String?
+  image              String?
+  password           String? // <- uložený hash hesla
+  roles              UserRole[]
+  accounts           Account[]
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  PasswordResetToken PasswordResetToken[]
+  VerificationToken  VerificationToken[]
 }
 
 model Account {
@@ -83,4 +82,24 @@ model RolePermission {
   permission   Permission @relation(fields: [permissionId], references: [id])
 
   @@id([roleId, permissionId])
+}
+
+model PasswordResetToken {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  tokenHash String
+  expiresAt DateTime
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  tokenHash String
+  expiresAt DateTime
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@index([userId])
 }

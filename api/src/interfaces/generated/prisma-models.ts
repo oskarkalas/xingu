@@ -10,6 +10,8 @@ export interface User {
   accounts?: Account[];
   createdAt: Date;
   updatedAt: Date;
+  PasswordResetToken?: PasswordResetToken[];
+  VerificationToken?: VerificationToken[];
 }
 
 export interface Account {
@@ -50,4 +52,20 @@ export interface RolePermission {
   permissionId: number;
   role?: Role;
   permission?: Permission;
+}
+
+export interface PasswordResetToken {
+  id: number;
+  userId: number;
+  tokenHash: string;
+  expiresAt: Date;
+  user?: User;
+}
+
+export interface VerificationToken {
+  id: number;
+  userId: number;
+  tokenHash: string;
+  expiresAt: Date;
+  user?: User;
 }

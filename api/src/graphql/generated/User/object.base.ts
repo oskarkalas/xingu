@@ -20,6 +20,8 @@ export const UserObject = definePrismaObject('User', {
     accounts: t.relation('accounts', UserAccountsFieldObject(t)),
     createdAt: t.field(UserCreatedAtFieldObject),
     updatedAt: t.field(UserUpdatedAtFieldObject),
+    PasswordResetToken: t.relation('PasswordResetToken', UserPasswordResetTokenFieldObject(t)),
+    VerificationToken: t.relation('VerificationToken', UserVerificationTokenFieldObject(t)),
   }),
 });
 
@@ -121,3 +123,53 @@ export const UserUpdatedAtFieldObject = defineFieldObject('User', {
   nullable: false,
   resolve: (parent) => parent.updatedAt,
 });
+
+export const UserPasswordResetTokenFieldArgs = builder.args((t) => ({
+  where: t.field({ type: Inputs.PasswordResetTokenWhereInput, required: false }),
+  orderBy: t.field({ type: [Inputs.PasswordResetTokenOrderByWithRelationInput], required: false }),
+  cursor: t.field({ type: Inputs.PasswordResetTokenWhereUniqueInput, required: false }),
+  take: t.field({ type: 'Int', required: false }),
+  skip: t.field({ type: 'Int', required: false }),
+  distinct: t.field({ type: [Inputs.PasswordResetTokenScalarFieldEnum], required: false }),
+}))
+
+export const UserPasswordResetTokenFieldObject = defineRelationFunction('User', (t) =>
+  defineRelationObject('User', 'PasswordResetToken', {
+    description: undefined,
+    nullable: false,
+    args: UserPasswordResetTokenFieldArgs,
+    query: (args) => ({
+      where: args.where || undefined,
+      cursor: args.cursor || undefined,
+      take: args.take || undefined,
+      distinct: args.distinct || undefined,
+      skip: args.skip || undefined,
+      orderBy: args.orderBy || undefined,
+    }),
+  }),
+);
+
+export const UserVerificationTokenFieldArgs = builder.args((t) => ({
+  where: t.field({ type: Inputs.VerificationTokenWhereInput, required: false }),
+  orderBy: t.field({ type: [Inputs.VerificationTokenOrderByWithRelationInput], required: false }),
+  cursor: t.field({ type: Inputs.VerificationTokenWhereUniqueInput, required: false }),
+  take: t.field({ type: 'Int', required: false }),
+  skip: t.field({ type: 'Int', required: false }),
+  distinct: t.field({ type: [Inputs.VerificationTokenScalarFieldEnum], required: false }),
+}))
+
+export const UserVerificationTokenFieldObject = defineRelationFunction('User', (t) =>
+  defineRelationObject('User', 'VerificationToken', {
+    description: undefined,
+    nullable: false,
+    args: UserVerificationTokenFieldArgs,
+    query: (args) => ({
+      where: args.where || undefined,
+      cursor: args.cursor || undefined,
+      take: args.take || undefined,
+      distinct: args.distinct || undefined,
+      skip: args.skip || undefined,
+      orderBy: args.orderBy || undefined,
+    }),
+  }),
+);

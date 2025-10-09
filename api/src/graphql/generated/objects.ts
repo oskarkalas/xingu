@@ -10,6 +10,8 @@ export {
   UserAccountsFieldObject,
   UserCreatedAtFieldObject,
   UserUpdatedAtFieldObject,
+  UserPasswordResetTokenFieldObject,
+  UserVerificationTokenFieldObject,
   createManyUserMutation,
   createOneUserMutation,
   deleteManyUserMutation,
@@ -183,6 +185,66 @@ export {
   countRolePermissionQueryObject,
   findUniqueRolePermissionQueryObject
 } from './RolePermission';
+export {
+  PasswordResetTokenObject,
+  PasswordResetTokenIdFieldObject,
+  PasswordResetTokenUserIdFieldObject,
+  PasswordResetTokenTokenHashFieldObject,
+  PasswordResetTokenExpiresAtFieldObject,
+  PasswordResetTokenUserFieldObject,
+  createManyPasswordResetTokenMutation,
+  createOnePasswordResetTokenMutation,
+  deleteManyPasswordResetTokenMutation,
+  deleteOnePasswordResetTokenMutation,
+  updateManyPasswordResetTokenMutation,
+  updateOnePasswordResetTokenMutation,
+  upsertOnePasswordResetTokenMutation,
+  createManyPasswordResetTokenMutationObject,
+  createOnePasswordResetTokenMutationObject,
+  deleteManyPasswordResetTokenMutationObject,
+  deleteOnePasswordResetTokenMutationObject,
+  updateManyPasswordResetTokenMutationObject,
+  updateOnePasswordResetTokenMutationObject,
+  upsertOnePasswordResetTokenMutationObject,
+  findFirstPasswordResetTokenQuery,
+  findManyPasswordResetTokenQuery,
+  countPasswordResetTokenQuery,
+  findUniquePasswordResetTokenQuery,
+  findFirstPasswordResetTokenQueryObject,
+  findManyPasswordResetTokenQueryObject,
+  countPasswordResetTokenQueryObject,
+  findUniquePasswordResetTokenQueryObject
+} from './PasswordResetToken';
+export {
+  VerificationTokenObject,
+  VerificationTokenIdFieldObject,
+  VerificationTokenUserIdFieldObject,
+  VerificationTokenTokenHashFieldObject,
+  VerificationTokenExpiresAtFieldObject,
+  VerificationTokenUserFieldObject,
+  createManyVerificationTokenMutation,
+  createOneVerificationTokenMutation,
+  deleteManyVerificationTokenMutation,
+  deleteOneVerificationTokenMutation,
+  updateManyVerificationTokenMutation,
+  updateOneVerificationTokenMutation,
+  upsertOneVerificationTokenMutation,
+  createManyVerificationTokenMutationObject,
+  createOneVerificationTokenMutationObject,
+  deleteManyVerificationTokenMutationObject,
+  deleteOneVerificationTokenMutationObject,
+  updateManyVerificationTokenMutationObject,
+  updateOneVerificationTokenMutationObject,
+  upsertOneVerificationTokenMutationObject,
+  findFirstVerificationTokenQuery,
+  findManyVerificationTokenQuery,
+  countVerificationTokenQuery,
+  findUniqueVerificationTokenQuery,
+  findFirstVerificationTokenQueryObject,
+  findManyVerificationTokenQueryObject,
+  countVerificationTokenQueryObject,
+  findUniqueVerificationTokenQueryObject
+} from './VerificationToken';
 import { builder } from '../builder';
 
 export const BatchPayload = builder.objectType(builder.objectRef<Prisma.BatchPayload>('BatchPayload'), {
@@ -199,6 +261,8 @@ export const modelNames = [
   'Permission',
   'UserRole',
   'RolePermission',
+  'PasswordResetToken',
+  'VerificationToken',
 ] as const;
 
 export type Model = typeof modelNames[number];

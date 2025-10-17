@@ -7,6 +7,7 @@ import { PrismaClient } from '@prisma/client';
 
 export interface GraphQLContext {
   user?: {
+    email: any;
     id: number;
     roles: string[];
     permissions: string[];

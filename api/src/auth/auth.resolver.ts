@@ -1,34 +1,50 @@
-import { Resolver, Mutation, Args, Query, Context } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
-import { UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from './jwt-auth.guard';
+import { builder } from '../graphql/builder';
+import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
+import { PrismaService } from '../prisma.service';
 
-@Resolver()
-export class AuthResolver {
-  constructor(private auth: AuthService) {}
+export function registerAuthResolvers() {
+  const prisma = new PrismaService();
+  const jwtService = new JwtService({ secret: 'mysecret' });
+  const configService = new ConfigService();
+  const authService = new AuthService(prisma, jwtService, configService);
 
-  @Mutation(() => String)
-  async register(
-    @Args('email') email: string,
-    @Args('password') password: string,
-    @Args('name', { nullable: true }) name?: string,
-  ) {
-    const token = await this.auth.register(email, password, name);
-    return token.accessToken;
-  }
+  builder.mutationField('register', (t) =>
+    t.string({
+      args: {
+        email: t.arg.string({ required: true }),
+        password: t.arg.string({ required: true }),
+        name: t.arg.string({ required: false }),
+      },
+      resolve: async (_root, args, _ctx) => {
+        const token = await authService.register(args.email, args.password, args.name);
+        return token.accessToken;
+      },
+    })
+  );
 
-  @Mutation(() => String)
-  async login(
-    @Args('email') email: string,
-    @Args('password') password: string,
-  ) {
-    const token = await this.auth.login(email, password);
-    return token.accessToken;
-  }
+  builder.mutationField('login', (t) =>
+    t.string({
+      args: {
+        email: t.arg.string({ required: true }),
+        password: t.arg.string({ required: true }),
+      },
+      resolve: async (_root, args, _ctx) => {
+        const token = await authService.loginWithPassword(args.email, args.password);
+        return token.accessToken;
+      },
+    })
+  );
 
-  @Query(() => String)
-  @UseGuards(JwtAuthGuard)
-  async me(@Context() ctx: any) {
-    return `Logged in as ${ctx.req.user.email}`;
-  }
+  builder.queryField('me', (t) =>
+    t.string({
+      resolve: async (_root, _args, ctx) => {
+        if (!ctx.user) {
+          throw new Error('Not authenticated');
+        }
+        return `Logged in as ${ctx.user.email}`;
+      },
+    })
+  );
 }

@@ -39,4 +39,5 @@ generateAllCrud({
   },
 });
 
+
 export const schema = builder.toSchema();

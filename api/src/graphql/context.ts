@@ -20,7 +20,7 @@ export async function createContext({ req, res }: { req: Request; res: Response 
 
   if (token) {
     try {
-      const payload = verify(token, process.env.JWT_ACCESS_SECRET!) as unknown as { sub: number };
+      const payload = verify(token, process.env.JWT_SECRET!) as unknown as { sub: number };
       const dbUser = await prisma.user.findUnique({
         where: { id: payload.sub },
         include: {

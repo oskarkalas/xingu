@@ -1,14 +1,10 @@
 import { AuthService } from './auth.service';
 import { builder } from '../graphql/builder';
-import { JwtService } from '@nestjs/jwt';
-import { ConfigService } from '@nestjs/config';
 import { PrismaService } from '../prisma.service';
 
 export function registerAuthResolvers() {
   const prisma = new PrismaService();
-  const jwtService = new JwtService({ secret: 'mysecret' });
-  const configService = new ConfigService();
-  const authService = new AuthService(prisma, jwtService, configService);
+  prisma.$connect().catch(console.error);
 
   builder.mutationField('register', (t) =>
     t.string({
@@ -18,7 +14,19 @@ export function registerAuthResolvers() {
         name: t.arg.string({ required: false }),
       },
       resolve: async (_root, args, _ctx) => {
+        // Dynamický import AuthService, aby použil správnou konfiguraci
+        const { JwtService } = await import('@nestjs/jwt');
+        const { ConfigService } = await import('@nestjs/config');
+        const { AuthService } = await import('./auth.service');
+
+        const jwtService = new JwtService({
+          secret: process.env.JWT_SECRET || 'default-secret-change-me'
+        });
+        const configService = new ConfigService();
+        const authService = new AuthService(prisma, jwtService, configService);
+
         const token = await authService.register(args.email, args.password, args.name);
+        console.log('Registration - Using JWT_SECRET:', (process.env.JWT_SECRET || 'default-secret-change-me').substring(0, 10) + '...');
         return token.accessToken;
       },
     })
@@ -31,6 +39,16 @@ export function registerAuthResolvers() {
         password: t.arg.string({ required: true }),
       },
       resolve: async (_root, args, _ctx) => {
+        const { JwtService } = await import('@nestjs/jwt');
+        const { ConfigService } = await import('@nestjs/config');
+        const { AuthService } = await import('./auth.service');
+
+        const jwtService = new JwtService({
+          secret: process.env.JWT_SECRET || 'default-secret'
+        });
+        const configService = new ConfigService();
+        const authService = new AuthService(prisma, jwtService, configService);
+
         const token = await authService.loginWithPassword(args.email, args.password);
         return token.accessToken;
       },
@@ -39,11 +57,24 @@ export function registerAuthResolvers() {
 
   builder.queryField('me', (t) =>
     t.string({
+      nullable: true,
       resolve: async (_root, _args, ctx) => {
+        console.log('Context user:', ctx.user);
+
         if (!ctx.user) {
           throw new Error('Not authenticated');
         }
-        return `Logged in as ${ctx.user.email}`;
+
+        // Načtěte kompletní user data z databáze
+        const user = await prisma.user.findUnique({
+          where: { email: ctx.user.email },
+        });
+
+        if (!user) {
+          throw new Error('User not found');
+        }
+
+        return `Logged in as ${user.email} (ID: ${user.id})`;
       },
     })
   );

@@ -4,12 +4,12 @@ import { registerAuthResolvers } from '../auth/auth.resolver';
 
 const authResolversMap = {
   User: {
-    findManyUser: ['user'],
-    findFirstUser: ['admin'],
-    findUniqueUser: ['admin'],
-    createOneUser: ['admin'],
-    updateOneUser: ['admin'],
-    deleteOneUser: ['admin'],
+    // findManyUser: ['user'],
+    // findFirstUser: ['admin'],
+    // findUniqueUser: ['admin'],
+    // createOneUser: ['admin'],
+    // updateOneUser: ['admin'],
+    // deleteOneUser: ['admin'],
   }
 } as const;
 

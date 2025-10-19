@@ -37,9 +37,6 @@ export class AuthService {
     if (!user || !user.password) return null;
     const ok = await bcrypt.compare(password, user.password);
     if (!ok) return null;
-    // remove sensitive
-    // return user without password
-    // Type could be User type from Prisma
     return user;
   }
 
@@ -113,7 +110,7 @@ export class AuthService {
 
   // vytvoří JWT access token (a případně refresh token)
   private createTokensForUser(user: any) {
-    const payload = { sub: user.id, email: user.email };
+    const payload = { sub: user.id, email: user.email, role: user.role };
     const accessToken = this.jwtService.sign(payload);
     // pokud chceš refresh tokens, vygeneruj a ulož – zde jednoduché řešení bez refresh
     return {
@@ -122,6 +119,7 @@ export class AuthService {
         id: user.id,
         email: user.email,
         name: user.name,
+        role: user.role,
         image: user.image,
       },
     };

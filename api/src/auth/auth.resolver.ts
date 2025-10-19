@@ -14,7 +14,6 @@ export function registerAuthResolvers() {
         name: t.arg.string({ required: false }),
       },
       resolve: async (_root, args, _ctx) => {
-        // Dynamický import AuthService, aby použil správnou konfiguraci
         const { JwtService } = await import('@nestjs/jwt');
         const { ConfigService } = await import('@nestjs/config');
         const { AuthService } = await import('./auth.service');
@@ -56,25 +55,26 @@ export function registerAuthResolvers() {
   );
 
   builder.queryField('me', (t) =>
-    t.string({
+    t.prismaField({
+      type: 'User',
       nullable: true,
-      resolve: async (_root, _args, ctx) => {
+      resolve: async (query, _root, _args, ctx) => {
         console.log('Context user:', ctx.user);
 
         if (!ctx.user) {
           throw new Error('Not authenticated');
         }
 
-        // Načtěte kompletní user data z databáze
         const user = await prisma.user.findUnique({
           where: { email: ctx.user.email },
+          ...query,
         });
 
         if (!user) {
           throw new Error('User not found');
         }
 
-        return `Logged in as ${user.email} (ID: ${user.id})`;
+        return user;
       },
     })
   );

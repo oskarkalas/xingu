@@ -37,6 +37,7 @@ export async function createContext({ req, res }: { req: Request; res: Response 
           r.role.permissions.map((rp) => rp.permission.name),
         );
         user = { id: dbUser.id, roles, permissions: Array.from(new Set(perms)) };
+        console.log(user)
       }
     } catch {}
   }

@@ -4,7 +4,7 @@ import { registerAuthResolvers } from '../auth/auth.resolver';
 
 const authResolversMap = {
   User: {
-    // findManyUser: ['user'],
+    findManyUser: ['admin'],
     // findFirstUser: ['admin'],
     // findUniqueUser: ['admin'],
     // createOneUser: ['admin'],

@@ -29,7 +29,7 @@ export const builder = new SchemaBuilder<{
   scopeAuth: {
     authScopes: async (ctx) => ({
       isAuthenticated: !!ctx.user,
-      hasRole: (r: string) => !!ctx.user?.roles.includes(r),
+      hasRole: (r: string) => {console.log(r);return !!ctx.user?.roles.includes(r)} ,
       hasPerm: (p: string) => !!ctx.user?.permissions.includes(p),
     }),
   },

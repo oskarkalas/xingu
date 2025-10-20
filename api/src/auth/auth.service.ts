@@ -33,7 +33,17 @@ export class AuthService {
 
   // ověření email/password
   async validateUserByPassword(email: string, password: string) {
-    const user = await this.prisma.user.findUnique({ where: { email } });
+    const user = await this.prisma.user.findUnique({
+      where: { email },
+      include: {
+        roles: {
+          include: {
+            role: true // Načte celý objekt role včetně name
+          }
+        }
+      }    });
+
+    console.log(user?.roles.map(value => value));
     if (!user || !user.password) return null;
     const ok = await bcrypt.compare(password, user.password);
     if (!ok) return null;

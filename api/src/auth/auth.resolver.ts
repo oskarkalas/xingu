@@ -59,8 +59,6 @@ export function registerAuthResolvers() {
       type: 'User',
       nullable: true,
       resolve: async (query, _root, _args, ctx) => {
-        console.log('Context user:', ctx.user);
-
         if (!ctx.user) {
           throw new Error('Not authenticated');
         }

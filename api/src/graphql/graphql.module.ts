@@ -20,14 +20,7 @@ import { createContext } from './context';
           playground: true,
           introspection: true,
           context: async ({ req, res }: any) => {
-            const ctx = await createContext({ req, res });
-            console.log('📦 Context created:', {
-              hasUser: !!ctx.user,
-              hasPrisma: !!ctx.prisma,
-              keys: Object.keys(ctx),
-              user: ctx.user
-            });
-            return ctx;
+            return await createContext({ req, res });
           },
         };
       },

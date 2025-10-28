@@ -1,7 +1,7 @@
 import { builder } from './builder';
 import { generateAllCrud } from './generated/autocrud';
 import { registerAuthResolvers } from '../auth/auth.resolver';
-import { GraphQLContext } from './context';
+
 const authResolversMap: Partial<Record<string, Record<string, readonly string[]>>> = {
   User: {
     findManyUser: ['admin'] as const,
@@ -23,32 +23,28 @@ generateAllCrud({
 
     return {
       ...field,
-      async resolve(
-        parent: any,
-        args: any,
-        ctx: GraphQLContext,
-        info: any
-      ) {
+      resolve: async function(...allArgs: any[]) {
+        let parent, args, ctx, info;
+        if (allArgs.length === 5) {
+          [, parent, args, ctx, info] = allArgs;
+        } else {
+          [parent, args, ctx, info] = allArgs;
+        }
+
         const requiredRoles = authResolversMap[modelName]?.[resolverName] ?? [];
         if (requiredRoles?.length) {
-          const userRoles = ctx.user?.roles ?? [];
+          const userRoles = ctx?.user?.roles ?? [];
           const isAuthorized = requiredRoles.some((r) =>
             userRoles.includes(r)
           );
-          console.log(requiredRoles, userRoles, ctx);
-          console.log(requiredRoles, userRoles, ctx);
-
           if (!isAuthorized) {
             throw new Error('Not authorized');
           }
         }
-
-        // voláme původní resolver
-        return originalResolve(parent, args, ctx, info);
+        return originalResolve.apply(this, allArgs);
       },
     };
   },
 });
 
 export const schema = builder.toSchema();
-

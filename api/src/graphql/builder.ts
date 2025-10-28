@@ -2,8 +2,8 @@ import SchemaBuilder from '@pothos/core';
 import PrismaPlugin from '@pothos/plugin-prisma';
 import PrismaTypes from './generated/pothos-types';
 import ScopeAuthPlugin from '@pothos/plugin-scope-auth';
-import { prisma } from '../prisma.client';
 import { GraphQLContext } from './context';
+import { prisma } from '../prisma.client';
 
 export const builder = new SchemaBuilder<{
   PrismaTypes: PrismaTypes;
@@ -14,14 +14,12 @@ export const builder = new SchemaBuilder<{
   AuthScopes: {
     isAuthenticated: boolean;
     hasRole: string;
-    isAdmin: boolean; // ← PŘIDALI JSME
+    isAdmin: boolean;
   };
 }>({
   plugins: [PrismaPlugin, ScopeAuthPlugin],
   prisma: {
     client: prisma,
-    // DŮLEŽITÉ: Explicitně říct Pothos, kde je prisma v contextu
-    dmmf: undefined,
   },
   scopeAuth: {
     authScopes: async (ctx) => {

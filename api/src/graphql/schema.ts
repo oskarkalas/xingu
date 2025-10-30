@@ -4,7 +4,7 @@ import { registerAuthResolvers } from '../auth/auth.resolver';
 
 const authResolversMap: Partial<Record<string, Record<string, readonly string[]>>> = {
   User: {
-    findManyUser: ['admin'] as const,
+    findManyUser: ['user'] as const,
     createOneUser: ['admin'] as const,
     deleteOneUser: ['admin'] as const,
   },

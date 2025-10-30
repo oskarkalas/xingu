@@ -54,6 +54,28 @@ export function registerAuthResolvers() {
     })
   );
 
+  builder.mutationField('loginWithGoogle', (t) =>
+    t.string({
+      args: {
+        idToken: t.arg.string({ required: true }),
+      },
+      resolve: async (_root, args, _ctx) => {
+        const { JwtService } = await import('@nestjs/jwt');
+        const { ConfigService } = await import('@nestjs/config');
+        const { AuthService } = await import('./auth.service');
+
+        const jwtService = new JwtService({
+          secret: process.env.JWT_SECRET || 'default-secret'
+        });
+        const configService = new ConfigService();
+        const authService = new AuthService(prisma, jwtService, configService);
+
+        const token = await authService.loginWithGoogleIdToken(args.idToken);
+        return token.accessToken;
+      },
+    })
+  );
+
   builder.queryField('me', (t) =>
     t.prismaField({
       type: 'User',
